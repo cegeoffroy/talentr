@@ -1,3 +1,4 @@
 <h2><%= @job.title %></h2>
 <p>Due-date: <%= @job.due_date %></p>
+<%= link_to 'Upload PDF', job_job_applications_path(@job), method: :post, class: 'btn btn-primary' %>
 <%= link_to "Back to dashboard", dashboard_path %>
