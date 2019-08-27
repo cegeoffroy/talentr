@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'job_applications/create'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth' }
   root to: 'pages#home'
   get 'dashboard', to: 'users#dashboard'
