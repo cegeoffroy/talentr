@@ -6,13 +6,13 @@ UNIVERSITIES = %w(University\ of\ Surrey University\ of\ Oxford University\ of\ 
                   UCL Kings\ College)
 SKILLS = %w(Accounting Enterpreneurship Microsoft\ Office Ruby Investment Web\ Development)
 
+Application.destroy_all
 JobKeyword.destroy_all
 Keyword.destroy_all
 Job.destroy_all
 User.destroy_all
 Info.destroy_all
 Candidate.destroy_all
-Application.destroy_all
 
 puts "creating keywords ..."
 KEYWORDS.each do |keyword|
