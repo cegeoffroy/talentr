@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>New Job opening</h2>
+  <div class="container-form">
+  <%= simple_form_for @job do |f| %>
+    <%= f.input :title, label: 'Job Title' %>
+    <%= f.input :due_date, label: 'Due in' %>
+  </div>
+  <div class="container-btns">
+    <div class="new-btn-left">
+      <%= f.submit "Create opening", class: "btn-primary" %>
+    </div>
+    <% end %>
+  </div>
+</div>
