@@ -10,22 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_134427) do
+ActiveRecord::Schema.define(version: 2019_08_27_154124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "applications", force: :cascade do |t|
-    t.bigint "candidate_id"
-    t.bigint "job_id"
-    t.datetime "date"
-    t.string "status"
-    t.integer "suitability"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["candidate_id"], name: "index_applications_on_candidate_id"
-    t.index ["job_id"], name: "index_applications_on_job_id"
-  end
 
   create_table "candidates", force: :cascade do |t|
     t.string "name"
@@ -42,6 +30,18 @@ ActiveRecord::Schema.define(version: 2019_08_27_134427) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["candidate_id"], name: "index_infos_on_candidate_id"
+  end
+
+  create_table "job_applications", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.bigint "job_id"
+    t.datetime "date"
+    t.string "status"
+    t.integer "suitability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_job_applications_on_candidate_id"
+    t.index ["job_id"], name: "index_job_applications_on_job_id"
   end
 
   create_table "job_keywords", force: :cascade do |t|
@@ -99,9 +99,9 @@ ActiveRecord::Schema.define(version: 2019_08_27_134427) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "applications", "candidates"
-  add_foreign_key "applications", "jobs"
   add_foreign_key "infos", "candidates"
+  add_foreign_key "job_applications", "candidates"
+  add_foreign_key "job_applications", "jobs"
   add_foreign_key "job_keywords", "jobs"
   add_foreign_key "job_keywords", "keywords"
   add_foreign_key "jobs", "users"
