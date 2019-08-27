@@ -1,4 +1,5 @@
 class JobApplicationsController < ApplicationController
+  before_action :authenticate_user!
   def create
     job = Job.find(params[:job_id])
     # => the candidate creation will be replaced with the actual PDF parsing method
