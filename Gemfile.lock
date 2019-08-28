@@ -252,9 +252,9 @@ DEPENDENCIES
   activerecord-session_store (~> 1.0)
   autoprefixer-rails
   bootsnap
-  convert_api
   carrierwave (~> 1.2)
   cloudinary (~> 1.9.1)
+  convert_api
   devise
   dotenv-rails
   faker

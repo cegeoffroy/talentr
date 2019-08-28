@@ -12,64 +12,60 @@
   <body>
     <div class="big-containers">
       <div id="mySidenav" class="left-sidebar">
-        <h1>Le Wagon</h1>
-        <div class="person">
-          <div class="online-badge"></div>
-          <span>arthur-littm</span>
+
+        <h1><strong>Talentr</strong><small>.io</small></h1>
+        <div class="nperson">
+          <!-- <div class="online-badge"></div>
+          <span>arthur-littm</span> -->
+          <img class="avatar-large" alt="Arthur Littmann" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" /></li>
+          <ul class="user-data">
+            <li class="name">Arthur Littmann</li>
+             <li class="company">Le Wagon</li>
+          </ul>
         </div>
         <div class="chat-section">
           <div class="chat-section-header">
-            <h3>Channels</h3>
+            <h3><i class="fas fa-hashtag fa-fw"></i> Dashboard</h3>
           </div>
-          <div class="channel">
-            <span><i class="fab fa-slack-hash"></i> general</span>
+        </div>
+        <div class="chat-section">
+          <div class="chat-section-header">
+            <h3><i class="fa fa-briefcase fa-fw"></i> Job Openings</h3>
           </div>
-          <div class="channel">
-            <span><i class="fab fa-slack-hash"></i> help</span>
-          </div>
-          <div class="channel active">
 
-            <span><i class="fab fa-slack-hash"></i> design</span>
-          </div>
-          <div class="channel">
-            <span><i class="fas fa-lock"></i> friday-drinks</span>
-          </div>
-          <div class="channel">
-            <span><i class="fas fa-lock"></i> climbing</span>
-          </div>
         </div>
 
         <div class="chat-section">
           <div class="chat-section-header">
-            <h3>Direct Messages</h3>
+            <h3><i class="far fa-address-card fa-fw"></i> All Aplicants</h3>
           </div>
-          <div class="person">
-            <div class="online-badge"></div>
-            <span>Matz</span>
+
+        </div>
+
+        <div class="chat-section">
+          <div class="chat-section-header">
+            <h3><i class="far fa-envelope-open fa-fw"></i> Mail Boxes</h3>
           </div>
-          <div class="person">
-            <div class="online-badge"></div>
-            <span>ATuring</span>
-          </div>
-          <div class="person">
-            <div class="offline-badge"></div>
-            <span>SteveWozniak</span>
-          </div>
-          <div class="person">
-            <div class="offline-badge"></div>
-            <span>Zuckerberg</span>
+        </div>
+
+        <hr>
+
+        <div class="chat-section">
+          <div class="chat-section-header">
+            <h3><i class="fas fa-cog fa-fw"></i> Settings</h3>
           </div>
         </div>
 
       </div>
-      <span style="font-size:30px;cursor:pointer; position: relative; top: 10px; " onclick="openNav()"> ></span>
+      <a id="myArrow" class="nav-arrow" onclick="closeNav()" style="color: #AAA;"> &laquo; </a>
       <div id="myContainer" class="right-container">
+
         <div class="main-cointainer">
           <%= yield %>
         </div>
       </div>
     </div>
-&#9776;
+
 
     <!-- <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> -->
@@ -78,12 +74,28 @@
     <%= javascript_pack_tag 'application' %>
     <script>
     function openNav() {
-      document.getElementById("mySidenav").style.left = "-180px";
-      document.getElementById("myContainer").style.marginLeft = "200px";
+      document.getElementById('myArrow').setAttribute('onclick','closeNav()');
+      document.getElementById("myArrow").style.left = "280px";
+      document.getElementById("myArrow").innerHTML = " &laquo; ";
+      document.getElementById("myArrow").style.color = "#AAA";
+
+      document.getElementById("mySidenav").style.left = "0px";
+      document.getElementById("mySidenav").style.boxShadow = "6px 0px 18px rgba(0, 0, 0, 0.1)";
+
+      // document.getElementById("mySidenav").style.width = "200px";
+      document.getElementById("myContainer").style.marginLeft = "280px";
     }
 
     function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById('myArrow').setAttribute('onclick','openNav()');
+      document.getElementById("myArrow").style.left = "20px";
+      document.getElementById("myArrow").innerHTML = " &raquo; ";
+      document.getElementById("myArrow").style.color = "#AAA";
+
+
+      document.getElementById("mySidenav").style.left = "-260px";
+      document.getElementById("mySidenav").style.boxShadow = "6px 0px 14px rgba(0, 0, 0, 0.2)";
+      document.getElementById("myContainer").style.marginLeft = "0px";
     }
     </script>
   </body>
