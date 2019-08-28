@@ -10,10 +10,81 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="big-containers">
+      <div id="mySidenav" class="left-sidebar">
+        <h1>Le Wagon</h1>
+        <div class="person">
+          <div class="online-badge"></div>
+          <span>arthur-littm</span>
+        </div>
+        <div class="chat-section">
+          <div class="chat-section-header">
+            <h3>Channels</h3>
+          </div>
+          <div class="channel">
+            <span><i class="fab fa-slack-hash"></i> general</span>
+          </div>
+          <div class="channel">
+            <span><i class="fab fa-slack-hash"></i> help</span>
+          </div>
+          <div class="channel active">
+
+            <span><i class="fab fa-slack-hash"></i> design</span>
+          </div>
+          <div class="channel">
+            <span><i class="fas fa-lock"></i> friday-drinks</span>
+          </div>
+          <div class="channel">
+            <span><i class="fas fa-lock"></i> climbing</span>
+          </div>
+        </div>
+
+        <div class="chat-section">
+          <div class="chat-section-header">
+            <h3>Direct Messages</h3>
+          </div>
+          <div class="person">
+            <div class="online-badge"></div>
+            <span>Matz</span>
+          </div>
+          <div class="person">
+            <div class="online-badge"></div>
+            <span>ATuring</span>
+          </div>
+          <div class="person">
+            <div class="offline-badge"></div>
+            <span>SteveWozniak</span>
+          </div>
+          <div class="person">
+            <div class="offline-badge"></div>
+            <span>Zuckerberg</span>
+          </div>
+        </div>
+
+      </div>
+      <span style="font-size:30px;cursor:pointer; position: relative; top: 10px; " onclick="openNav()"> ></span>
+      <div id="myContainer" class="right-container">
+        <div class="main-cointainer">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+&#9776;
+
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
+
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.left = "-180px";
+      document.getElementById("myContainer").style.marginLeft = "200px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+    </script>
   </body>
 </html>
