@@ -1,0 +1,175 @@
+.big-containers {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  background-color: #E9E9E9;
+  margin: 0px !important;
+}
+
+/**** LEFT SIDEBAR ****/
+.left-sidebar {
+  background-color: white;
+  color: #192A3E;
+  padding: 16px;
+  box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.6s;
+
+}
+
+.left-sidebar h1 {
+  font-size: 24px;
+}
+
+
+/**** RIGHT CONTAINER ****/
+.right-container {
+  flex-grow: 1;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: margin-left .5s;
+
+}
+
+/**** MAIN CONTAINER ****/
+.main-cointainer {
+  height: 85%;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);
+  width: 84%;
+  border-top: #FFB946 2px solid;
+  background: white;
+  padding-top: 15px;
+}
+
+
+
+
+
+
+/**** I DONT THINK WE ARE USING THIS *****/
+
+
+.organizations-sidebar {
+  background-color: #261C25;
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+.organization {
+  opacity: .3;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.organization:hover {
+  opacity: 1;
+}
+
+.organization.active {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+
+
+
+
+
+.chat-section {
+  margin-top: 24px;
+}
+
+.chat-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-section-header h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+
+
+/****  ****/
+
+
+
+
+.message {
+  display: flex;
+  align-items: flex-start;
+}
+
+.message img {
+  width: 40px;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+.message .message-content {
+  flex-grow: 1;
+}
+
+.message .message-content p:first-child {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+
+
+
+/****  ****/
+
+
+
+
+.person, .channel {
+  display: flex;
+  align-items: center;
+}
+
+.person span, .channel span {
+  opacity: .5;
+}
+.channel i {
+  font-size: 14px;
+  margin-right: 4px;
+}
+
+.channel.active span {
+  opacity: 1;
+}
+
+.online-badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #1FE5BD;
+  margin-top: 2px;
+  margin-right: 8px;
+}
+
+
+.offline-badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+  margin-top: 2px;
+  margin-right: 8px;
+  opacity: .5;
+}
