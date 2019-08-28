@@ -10,17 +10,16 @@
 .left-sidebar {
   background-color: white;
   color: #192A3E;
-  padding: 16px;
+  padding: 24px 48px;
   box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.1);
-  height: 100%;
-  width: 0;
+  height: 100vh;
+  width: 280px;
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
+  left: 0px;
   overflow-x: hidden;
-  transition: 0.6s;
-
+  transition: 0.8s;
 }
 
 .left-sidebar h1 {
@@ -36,26 +35,53 @@
   align-items: center;
   justify-content: center;
 
-  transition: margin-left .5s;
+  margin-left:280px;
+
+  transition: margin-left 0.8s;
 
 }
 
 /**** MAIN CONTAINER ****/
 .main-cointainer {
-  height: 85%;
+  height: 88%;
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.12);
-  width: 84%;
+  width: 86%;
   border-top: #FFB946 2px solid;
   background: white;
-  padding-top: 15px;
+  padding: 48px 24px 30px 24px;
 }
 
 
 
+/***** NAV ARROW ****/
+a.nav-arrow {
+  font-size: 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  position: absolute;
+  left: 280px;
+  padding: 0 12px;
+  top: 18px;
+  color: #AAA;
+  transition: 0.8s;
+  opacity: 0.4;
+  height: 90%;
+}
+
+.nav-arrow:hover {
+  opacity: 0.8;
+}
+
+.chat-section {
+  margin: 2.5em 0;
+}
+
+.fa-fw{
+  margin-right: 6px;
+}
 
 
-
-/**** I DONT THINK WE ARE USING THIS *****/
+/**** I DINDT CHECK IF WE ARE USING THIS *****/
 
 
 .organizations-sidebar {
@@ -86,10 +112,6 @@
 
 
 
-
-.chat-section {
-  margin-top: 24px;
-}
 
 .chat-section-header {
   display: flex;

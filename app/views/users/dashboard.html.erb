@@ -1,9 +1,5 @@
-<h1>Talentr Dashboard</h1>
+<div class="title"><h1>Dashboard</h1> <%= link_to "New Opening", new_job_path, class: "nbtn nbtn-primary" %></div>
 
-<%= link_to "New Opening", new_job_path, class: "btn btn-outline-primary" %>
-<div>
-
-</div>
 <div>
   <p>Open positions (<%= @jobs.count %>)</p>
   <%= render 'jobs/index', jobs: @jobs %>
