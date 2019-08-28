@@ -19,6 +19,8 @@ gem 'faker'
 gem 'pundit'
 gem 'activerecord-session_store', '~> 1.0'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
+gem 'cloudinary', '~> 1.9.1'
+gem 'carrierwave', '~> 1.2'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
