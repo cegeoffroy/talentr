@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_08_27_154124) do
     t.string "linkedin_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_candidates_on_user_id"
   end
 
   create_table "infos", force: :cascade do |t|
@@ -95,6 +97,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_154124) do
     t.integer "expires_at"
     t.boolean "expires"
     t.string "refresh_token"
+    t.string "photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
