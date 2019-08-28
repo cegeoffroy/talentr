@@ -67,6 +67,7 @@ GEM
       rest-client
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
+    convert_api (1.2.0)
     crass (1.0.4)
     devise (4.6.2)
       bcrypt (~> 3.0)
@@ -251,6 +252,7 @@ DEPENDENCIES
   activerecord-session_store (~> 1.0)
   autoprefixer-rails
   bootsnap
+  convert_api
   carrierwave (~> 1.2)
   cloudinary (~> 1.9.1)
   devise
