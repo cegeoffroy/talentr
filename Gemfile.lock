@@ -59,6 +59,7 @@ GEM
     byebug (11.0.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
+    convert_api (1.2.0)
     crass (1.0.4)
     devise (4.6.2)
       bcrypt (~> 3.0)
@@ -228,6 +229,7 @@ DEPENDENCIES
   activerecord-session_store (~> 1.0)
   autoprefixer-rails
   bootsnap
+  convert_api
   devise
   dotenv-rails
   faker

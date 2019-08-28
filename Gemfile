@@ -19,6 +19,7 @@ gem 'faker'
 gem 'pundit'
 gem 'activerecord-session_store', '~> 1.0'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
+gem 'convert_api'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
