@@ -6,7 +6,7 @@ UNIVERSITIES = %w(University\ of\ Surrey University\ of\ Oxford University\ of\ 
                   UCL Kings\ College)
 SKILLS = %w(Accounting Enterpreneurship Microsoft\ Office Ruby Investment Web\ Development)
 
-Application.destroy_all
+JobApplication.destroy_all
 JobKeyword.destroy_all
 Keyword.destroy_all
 Job.destroy_all
@@ -82,7 +82,7 @@ Job.find_each do |job|
     Info.create(candidate: c, meta_key: "tagline", meta_value: Faker::GreekPhilosophers.quote)
     Info.create(candidate: c, meta_key: "language", meta_value: "English")
     Info.create(candidate: c, meta_key: "skill", meta_value: SKILLS.sample)
-    Application.create(job: job, candidate: c,
+    JobApplication.create(job: job, candidate: c,
                     date: Date.today.to_datetime - (1..20).to_a.sample.days,
                     status: "pending", suitability: (1..100).to_a.sample)
   end
