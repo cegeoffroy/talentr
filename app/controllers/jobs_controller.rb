@@ -2,6 +2,10 @@ class JobsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_job, only: [:show]
 
+  def index
+    @jobs = policy_scope(Job).order(due_date: :desc)
+  end
+
   def new
     @job = Job.new
     authorize @job

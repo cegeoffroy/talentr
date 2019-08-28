@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'dashboard', to: 'users#dashboard'
 
-  resources :jobs, only: [:new, :create, :show] do
+  resources :jobs, only: [:index, :new, :create, :show] do
     resources :job_applications, only: :create
   end
   resources :candidates, only: [:index, :show]

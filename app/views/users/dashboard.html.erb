@@ -1,2 +1,7 @@
-<h1>Users#dashboard</h1>
-<p>Find me in app/views/users/dashboard.html.erb</p>
+<h1>Talentr Dashboard</h1>
+
+<%= link_to "New Opening", new_job_path, class: "btn btn-outline-primary" %>
+<div>
+  <%= render 'jobs/index', jobs: @jobs %>
+</div>
+
