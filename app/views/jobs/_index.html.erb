@@ -8,7 +8,7 @@
   </tr>
   <% @jobs.each do |job| %>
   <tr>
-    <td><%= job.title %></td>
+    <td><%= link_to job.title, job_path(job) %></td>
     <td><%= job.job_applications.where(status: 'pending').count %></td>
     <!-- Insert here job_application -->
     <td><%= job.job_applications.where(status: 'accepted').count %></td>

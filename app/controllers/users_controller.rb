@@ -3,5 +3,6 @@ class UsersController < ApplicationController
   def dashboard
     authorize User
     @jobs = current_user.jobs
+    # @candidates = current_user.jobs.candidates
   end
 end

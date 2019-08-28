@@ -1,4 +1,19 @@
 <h2><%= @job.title %></h2>
 <p>Due-date: <%= @job.due_date %></p>
 <%= link_to 'Upload PDF', job_job_applications_path(@job), method: :post, class: 'btn btn-primary' %>
+<h2>List of candidates (<%= @job.candidates.count %>)</h2>
+
+<div>
+  <% if @job.candidates.any? %>
+    <ul>
+      <% @job.candidates.each do |candidate| %>
+        <li>
+          <%= candidate.name%> - <%= candidate.email %> - <%= candidate.created_at %>- <%= candidate.days_since_applied %> days ago <%= link_to "show", candidate_path(candidate, job_id: @job.id) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No candidate yet for this job opening</p>
+  <% end %>
+</div>
 <%= link_to "Back to dashboard", dashboard_path %>
