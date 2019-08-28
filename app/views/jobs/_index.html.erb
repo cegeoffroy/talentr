@@ -1,0 +1,19 @@
+<table style="width:100%">
+  <tr>
+    <th>Jobs</th>
+    <th>PENDING</th>
+    <th>ACCEPTED</th>
+    <th>TOTAL</th>
+    <th>DUE ON</th>
+  </tr>
+  <% @jobs.each do |job| %>
+  <tr>
+    <td><%= job.title %></td>
+    <td><%= job.job_applications.where(status: 'pending').count %></td>
+    <!-- Insert here job_application -->
+    <td><%= job.job_applications.where(status: 'accepted').count %></td>
+    <td><%= job.job_applications.count %></td>
+    <td><%= job.due_date %></td>
+  </tr>
+  <% end %>
+</table>
