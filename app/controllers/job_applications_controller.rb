@@ -4,10 +4,12 @@ class JobApplicationsController < ApplicationController
   before_action :authenticate_user!
   def create
     job = Job.find(params[:job_id])
-    result = convertapi_call("https://res.cloudinary.com/dqh0reqn3/image/upload/v1566987213/cvtest.pdf")
-    # candidate = Parser.parse(result)
-    # => result is now a txt
-    # => the candidate creation will be replaced with the actual PDF parsing method
+    ### => here loop begins for each PDF uploaded
+    # TODO: upload to cloudinary - receive a link
+    cloudinary_url = "https://res.cloudinary.com/dqh0reqn3/image/upload/v1566987213/cvtest.pdf"
+    result = convertapi_call(cloudinary_url)
+    # => result is now a string
+    # TODO: candidate = Parser.parse(result)
     candidate = Candidate.create(name: Faker::Name.name,
                                  email: Faker::Internet.free_email,
                                  linkedin_url: 'https://www.linkedin.com/in/dmytrotarasenko/')
@@ -15,6 +17,9 @@ class JobApplicationsController < ApplicationController
                                           date: Date.today.to_datetime,
                                           suitability: (1..100).to_a.sample)
     authorize @job_application
+    ### => Here loop ends
+
+    # => The below should be replaced with logic confirming all jobapplications have saved
     if @job_application.save
       redirect_to candidate_path(candidate)
     else
