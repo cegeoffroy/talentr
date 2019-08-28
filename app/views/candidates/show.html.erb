@@ -1,0 +1,9 @@
+<h2>Detail</h2>
+<h3><%= @candidate.name %></h2>
+<p><%= @candidate.email %></p>
+
+<% if params[:job_id]%>
+  <%= link_to "Go back", job_path(Job.find(params[:job_id])) %>
+<% else %>
+  <%  %>
+<% end %>

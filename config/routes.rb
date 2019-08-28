@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth' }
   root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'dashboard', to: 'users#dashboard'
+
+  resources :jobs, only: [:index, :new, :create, :show] do
+    resources :job_applications, only: :create
+  end
+  resources :candidates, only: [:index, :show]
 end

@@ -54,3 +54,7 @@
               <button type="button" class="btn btn-danger">Danger</button>
               <button type="button" class="btn btn-link">Link</button>
             <button class="source-button btn btn-primary btn-xs" role="button" tabindex="0">&lt; &gt;</button></p>
+<h1>Homepage</h1>
+  <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-primary" %>
+  <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-secondary" %>
