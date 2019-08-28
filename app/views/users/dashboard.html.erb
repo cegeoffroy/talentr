@@ -2,6 +2,10 @@
 
 <%= link_to "New Opening", new_job_path, class: "btn btn-outline-primary" %>
 <div>
+
+</div>
+<div>
+  <p>Open positions (<%= @jobs.count %>)</p>
   <%= render 'jobs/index', jobs: @jobs %>
 </div>
 
