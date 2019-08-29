@@ -1,0 +1,6 @@
+<%= simple_form_for @candidate, url: job_job_applications_path(params[:job_id]) do |f| %>
+
+  <%= f.file_field :attachment, required: true, multiple: true %>
+  <%= f.button :submit, "Upload CVs", class: "btn-primary" %>
+<% end %>
+<%= link_to "Go back", job_path(Job.find(params[:job_id])) %>

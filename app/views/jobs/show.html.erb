@@ -1,7 +1,7 @@
 <h1><%= @job.title %></h1>
 <p>Due-date: <%= @job.due_date %></p>
-<%= link_to 'Upload PDF', job_job_applications_path(@job), method: :post, class: 'btn btn-primary' %>
-<h2>List of candidates (<%= @job.candidates.count %>)</h2>
+<%= link_to 'Upload CV', new_candidate_path(job_id: @job.id), class: 'btn btn-primary' %>
+<h2>List of candidates <%= @job.candidates.count %></h2>
 
 <div>
   <% if @job.candidates.any? %>
