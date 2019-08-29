@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#dashboard'
 
   resources :jobs, only: [:index, :new, :create, :show] do
-    resources :job_applications, only: :create
+    resources :job_applications, only: [:new, :create]
   end
-  resources :candidates, only: [:index, :show]
+  resources :candidates, only: [:new, :index, :show]
 end

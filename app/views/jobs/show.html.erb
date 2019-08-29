@@ -1,6 +1,6 @@
 <div class="title">
   <h1><%= @job.title %></h1>
-  <%= link_to 'Upload PDF', job_job_applications_path(@job), method: :post, class: 'nbtn nbtn-primary' %>
+  <%= link_to 'Upload CV', new_candidate_path(job_id: @job.id), class: 'nbtn nbtn-primary' %>
 </div>
 
 <p>Due-date: <%= @job.due_date.strftime("%d %b '%y") %></p>
