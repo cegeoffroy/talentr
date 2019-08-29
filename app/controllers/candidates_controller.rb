@@ -10,6 +10,11 @@ class CandidatesController < ApplicationController
     authorize @candidate
   end
 
+  def new
+    @candidate = Candidate.new
+    authorize @candidate
+  end
+
   private
 
   def set_candidates
