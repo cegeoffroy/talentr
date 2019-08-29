@@ -42,6 +42,7 @@
   letter-spacing: 0.01em;
   padding: 10px 40px;
   outline: none;
+  float: left;
 }
 
 .nbtn:hover {
@@ -128,6 +129,28 @@
 }
 
 .nbtn-tertiary:disabled {
+  color: #109CF1;
+}
+
+.nbtn-simple {
+  color: #AAA;
+  background: none !important;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  left: 24px;
+  bottom: 30px;
+}
+
+.nbtn-simple:hover {
+  color: #34AFF9;
+}
+
+.nbtn-simple:active {
+  color: #098EDF;
+}
+
+.nbtn-simple:disabled {
   color: #109CF1;
 }
 
