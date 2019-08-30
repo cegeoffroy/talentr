@@ -2,7 +2,9 @@ require 'open-uri'
 
 class JobApplicationsController < ApplicationController
   before_action :authenticate_user!
+
   def create
+    raise
     job = Job.find(params[:job_id])
     ### => here loop begins for each PDF uploaded
     # TODO: upload to cloudinary - receive a link
