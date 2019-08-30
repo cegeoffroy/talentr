@@ -1,5 +1,12 @@
-<%= simple_form_for :applications, url: job_job_applications_path(@job) do |f| %>
-  <%= f.file_field :attachments, required: true, multiple: true, accept: ".pdf"  %>
-  <%= f.button :submit, "Upload CVs", class: "btn-primary" %>
-<% end %>
-<%= link_to "Go back", job_path(@job) %>
+<div class="title">
+  <h1><%= @job.title %></h1>
+
+</div>
+<div style="height: 350px; overflow-y: auto">
+  <%= simple_form_for :applications, url: job_job_applications_path(@job) do |f| %>
+    <%= f.file_field :attachments, required: true, multiple: true, accept: ".pdf"  %>
+    <br />
+    <p><%= f.button :submit, "Upload CVs", class: "nbtn nbtn-primary", style: "margin-top:24px;" %></p>
+  <% end %>
+</div>
+<%= link_to "« Go back", job_path(@job), class: 'nbtn nbtn-simple' %>
