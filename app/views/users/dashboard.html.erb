@@ -7,12 +7,15 @@
   <%= render 'candidates/index', jobs: @candidates %>
 </div>
 <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-left: 10px">
-  <div style="height: 50%; width: 50%">
+  <div style="height: 50%; width: 50%; overflow-y: auto;">
     <p><strong>Inbound applications</strong></p>
   </div>
   <div>
     <p><strong>Open job positions (<%= @jobs.count %>)</strong></p>
-    <%= render 'jobs/index', jobs: @jobs %>
+    <div style="height: 100px; overflow: auto">
+      <%= render 'jobs/index', jobs: @jobs %>
+    </div>
+
   </div>
 </div>
 

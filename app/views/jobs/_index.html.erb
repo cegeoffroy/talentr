@@ -1,19 +1,21 @@
-<table style="width:100%">
-  <tr>
-    <th></th>
-    <th>PENDING</th>
-    <th>ACCEPTED</th>
-    <th>TOTAL</th>
-    <th>DUE</th>
-  </tr>
-  <% @jobs.each do |job| %>
-  <tr>
-    <td><%= link_to job.title, job_path(job) %></td>
-    <td><%= job.job_applications.where(status: 'pending').count %></td>
-    <!-- Insert here job_application -->
-    <td><%= job.job_applications.where(status: 'accepted').count %></td>
-    <td><%= job.job_applications.count %></td>
-    <td><%= job.due_date.strftime("%d %b") %></td>
-  </tr>
-  <% end %>
-</table>
+<div>
+  <table style="width:100%">
+    <tr>
+      <th></th>
+      <th>PENDING</th>
+      <th>ACCEPTED</th>
+      <th>TOTAL</th>
+      <th>DUE</th>
+    </tr>
+    <% @jobs.each do |job| %>
+    <tr>
+      <td><%= link_to job.title, job_path(job) %></td>
+      <td><%= job.job_applications.where(status: 'pending').count %></td>
+      <!-- Insert here job_application -->
+      <td><%= job.job_applications.where(status: 'accepted').count %></td>
+      <td><%= job.job_applications.count %></td>
+      <td><%= job.due_date.strftime("%d %b") %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
