@@ -9,10 +9,10 @@ SKILLS = %w(Accounting Enterpreneurship Microsoft\ Office Ruby Investment Web\ D
 JobApplication.destroy_all
 JobKeyword.destroy_all
 Keyword.destroy_all
-Job.destroy_all
-User.destroy_all
 Info.destroy_all
 Candidate.destroy_all
+User.destroy_all
+Job.destroy_all
 
 puts "creating keywords ..."
 KEYWORDS.each do |keyword|
@@ -74,9 +74,11 @@ Job.find_each do |job|
 
   puts 'creating 3 candidates per job ...'
   3.times do
-    c = Candidate.create(name: Faker::Name.name,
+    c = Candidate.new(name: Faker::Name.name,
                      email: Faker::Internet.free_email,
                      linkedin_url: 'https://www.linkedin.com/in/dmytrotarasenko/')
+    c.user = job.user
+    c.save!
     Info.create(candidate: c, meta_key: "experience", meta_value: (0..10).to_a.sample)
     Info.create(candidate: c, meta_key: "education", meta_value: UNIVERSITIES.sample)
     Info.create(candidate: c, meta_key: "tagline", meta_value: Faker::GreekPhilosophers.quote)
