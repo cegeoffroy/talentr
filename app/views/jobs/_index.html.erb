@@ -1,6 +1,6 @@
 <table style="width:100%">
   <tr>
-    <th>Jobs</th>
+    <th>JOBS </th>
     <th>PENDING</th>
     <th>ACCEPTED</th>
     <th>TOTAL</th>
@@ -13,7 +13,7 @@
     <!-- Insert here job_application -->
     <td><%= job.job_applications.where(status: 'accepted').count %></td>
     <td><%= job.job_applications.count %></td>
-    <td><%= job.due_date %></td>
+    <td><%= job.due_date.strftime("%d %b '%y") %></td>
   </tr>
   <% end %>
 </table>
