@@ -1,8 +1,10 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-  <a href="<%= omniauth_authorize_path(resource_name, provider) %>" class="nbtn nbtn-secondary" style="clear:both; padding: 8px 24px; width: 100%;"> <img src="/assets/g-logo.png" width="24" style="margin-right: 8px;" /> Sign in with Google </a>
-<!--     <%= link_to "Sign in with Google", omniauth_authorize_path(resource_name, provider), class: "nbtn nbtn-secondary", style: "background: url(/assets/g-logo.png) no-repeat 10px; background-size: 10%;" %> -->
+  <a href="<%= omniauth_authorize_path(resource_name, provider) %>" class="nbtn nbtn-secondary" style="clear:both; padding: 8px 24px; width: 100%;">
+    <%= image_tag 'g-logo.png', class: 'google-img' %>
+  Sign in with Google
+  </a>
   <% end %>
 <% end %>
 
