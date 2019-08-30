@@ -10,9 +10,9 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <div class="big-containers">
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
 
+      <div class="big-containers">
         <div id="mySidenav" class="left-sidebar">
           <h1><strong>Talentr</strong><small>.io</small></h1>
           <div class="nperson">
@@ -63,25 +63,20 @@
             <%= yield %>
           </div>
         </div>
+      </div>
 
-      <% elsif current_page?('/users/sign_in') or current_page?('/users/sign_up') or current_page?('/users/password/new') %>
+    <% elsif current_page?('/users/sign_in') or current_page?('/users/sign_up') or current_page?('/users/password/new') %>
+      <div class="big-containers">
         <div id="myContainer" class="right-container" style="margin-left: 0px;">
           <div class="main-cointainer" style="width: 80%; max-width: 400px; height: auto;">
             <%= yield %>
           </div>
         </div>
+      </div>
 
-      <% else %>
-
-        <div id="myContainer" class="right-container" style="margin-left: 0px;">
-          <div class="main-cointainer" style="width: 80%; max-width: 400px; height: auto;">
-            Landing
-            <%= yield %>
-          </div>
-        </div>
-
-      <% end %>
-    </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
 
 
     <!-- <p class="notice"><%= notice %></p>
