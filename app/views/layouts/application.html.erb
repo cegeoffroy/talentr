@@ -11,15 +11,9 @@
   </head>
   <body>
     <div class="big-containers">
-      <% if current_page?('/users/sign_in') or current_page?('/users/sign_up') or current_page?('/users/password/new') %>
-        <div id="myContainer" class="right-container" style="margin-left: 0px;">
-          <div class="main-cointainer" style="width: 80%; max-width: 400px; height: auto;">
-            <%= yield %>
-          </div>
-        </div>
-      <% else %>
-        <div id="mySidenav" class="left-sidebar">
+      <% if user_signed_in? %>
 
+        <div id="mySidenav" class="left-sidebar">
           <h1><strong>Talentr</strong><small>.io</small></h1>
           <div class="nperson">
             <!-- <div class="online-badge"></div>
@@ -69,6 +63,23 @@
             <%= yield %>
           </div>
         </div>
+
+      <% elsif current_page?('/users/sign_in') or current_page?('/users/sign_up') or current_page?('/users/password/new') %>
+        <div id="myContainer" class="right-container" style="margin-left: 0px;">
+          <div class="main-cointainer" style="width: 80%; max-width: 400px; height: auto;">
+            <%= yield %>
+          </div>
+        </div>
+
+      <% else %>
+
+        <div id="myContainer" class="right-container" style="margin-left: 0px;">
+          <div class="main-cointainer" style="width: 80%; max-width: 400px; height: auto;">
+            Landing
+            <%= yield %>
+          </div>
+        </div>
+
       <% end %>
     </div>
 
