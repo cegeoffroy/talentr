@@ -4,6 +4,6 @@ class Candidate < ApplicationRecord
   belongs_to :user
 
   def days_since_applied
-    (Date.today.to_date - created_at.to_date).to_i
+    (Date.today.to_date - job_applications.first.date.to_date).to_i
   end
 end

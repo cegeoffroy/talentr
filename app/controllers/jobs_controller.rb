@@ -12,11 +12,14 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.new(job_params)
+    keywords = params[:job][:keywords][:keywords]
+
+    @job = Job.new(title: job_params[:title],
+                   due_date: DateTime.parse(job_params[:due_date]))
     authorize @job
     @job.user = current_user
     if @job.valid?
-      @job.save
+      create_keywords(@job, keywords)
       redirect_to job_path(@job)
     else
       render :new
@@ -34,7 +37,13 @@ class JobsController < ApplicationController
   end
 
   def job_params
-    params.require(:job).permit(:title,
-                                :due_date)
+    params.require(:job).permit(:title, :due_date)
+  end
+
+  def create_keywords(job, keywords)
+    keywords.split(",").each do |word|
+      keyword = Keyword.find_or_create_by(word: word)
+      JobKeyword.create(job: job, keyword: keyword)
+    end
   end
 end
