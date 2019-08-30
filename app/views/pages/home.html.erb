@@ -1,25 +1,24 @@
 <div style="display: flex; justify-content: space-between; flex-grow: 1; padding: 48px 86px; background-color: #F8F9FA;">
   <div>
-    <h1 style="font-size: 3.5em; margin: 0px; padding: 0px;"><strong>Talentr</strong><small>.io</small></h1>
+    <h1 style="font-size: 2.5em; margin: 0px; padding: 0px;"><strong>Talentr</strong><small>.io</small></h1>
   </div>
   <div>
     <%= link_to "Sign up", new_user_registration_path, class: "nbtn nbtn-secondary" %>
     <%= link_to "Login", new_user_session_path, class: "nbtn nbtn-primary" %>
   </div>
 </div>
-<div style="clear:both; background-color: #F8F9FA; padding: 48px 86px; display: flex; justify-content: space-between; align-items: center;">
+<div style="clear:both; background-color: #F8F9FA; padding: 10px 86px 0 86px; display: flex; justify-content: space-between; align-items: center;">
   <div>
     <div>
-      <h2 style="margin: 0px; font-size: 45px; letter-spacing: 0.1;">A data driven way to hire.</h2 style="margin: 0px;">
-      <p style="letter-spacing: 0.05em; color:#788594;">Meet the tool thats saves more than 60% of your time when hiring.</p>
-      <%= link_to "Try for free", new_user_session_path, class: "nbtn nbtn-primary", style: "font-size: 1.5em; padding: 18px 48px; margin-top: 48px;
+      <h2 style="margin: 0px; font-size: 55px; letter-spacing: 0.1;">A data driven way to hire.</h2 style="margin: 0px;">
+      <p style="letter-spacing: 0.05em; color:#788594;">Meet the tool that saves more than 60% of your time when hiring.</p>
+      <%= link_to "Try for free", new_user_session_path, class: "nbtn nbtn-primary", style: "font-size: 1.5em; padding: 18px 48px; margin-top: 24px;
 " %>
     </div>
   </div>
-  <%= image_tag("final_img.png", :alt => "hiring-process", :width => "400") %>
+  <%= image_tag("final_img.png", :alt => "hiring-process", :width => "500") %>
 
 </div>
-
-<div style="clear:both; padding: 48px 86px; display: flex; justify-content: space-between; background-image: url('/assets/grey-bg.svg'); background-position: 50% calc(100% + 1px); height: 235px;  padding: 0 86px;">
+<div class="home-background">
    <p><% link_to "Try for free", new_user_session_path, class: "nbtn nbtn-primary", style: "font-size: 1.5em; padding: 18px 48px" %></p>
 </div>
