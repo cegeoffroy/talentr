@@ -4,17 +4,25 @@
 </div>
 
 <p>Due-date: <%= @job.due_date.strftime("%d %b '%y") %></p>
-
-<div>
+<div style="height: 350px; overflow-y: auto">
   <% if @job.candidates.any? %>
     <h2>List of candidates (<%= @job.candidates.count %>)</h2>
-    <ul>
+    <table style="width:100%">
+      <tr>
+        <th>APPLICATIONS</th>
+        <th>EMAIL</th>
+        <th>RECEIVED</th>
+        <th>ACTIONS</th>
+      </tr>
       <% @job.candidates.each do |candidate| %>
-        <li>
-          <%= candidate.name%> - <%= candidate.email %> - <%= candidate.created_at %>- <%= candidate.days_since_applied %> days ago <%= link_to "show", candidate_path(candidate, job_id: @job.id) %>
-        </li>
+      <tr>
+        <td><%= candidate.name%></td>
+        <td><%= candidate.email %></td>
+        <td><%= candidate.days_since_applied %> days ago</td>
+        <td><%= link_to "show", candidate_path(candidate, job_id: @job.id) %></td>
+      </tr>
       <% end %>
-    </ul>
+    </table>
   <% else %>
     <p>No candidate yet for this job opening</p>
   <% end %>

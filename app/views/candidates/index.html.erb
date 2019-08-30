@@ -1,0 +1,25 @@
+<h1>List of candidates</h1>
+
+<div style="height: 350px; overflow-y: auto">
+  <% if @candidates.any? %>
+    <table style="width:100%">
+      <tr>
+        <th>CANDIDATES</th>
+        <th>EMAIL</th>
+        <th>RECEIVED</th>
+        <th>ACTIONS</th>
+      </tr>
+      <% @candidates.each do |candidate| %>
+      <tr>
+        <td><%= candidate.name%></td>
+        <td><%= candidate.email %></td>
+        <td><%= candidate.days_since_applied %> days ago</td>
+        <td><%= link_to "show", candidate_path(candidate) %></td>
+      </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>No candidate yet in your database</p>
+  <% end %>
+</div>
+<%= link_to "« Back to Dashboard", dashboard_path, class: 'nbtn nbtn-simple' %>
