@@ -1,5 +1,8 @@
 meta_product_name: "Talentr"
 meta_title: "Talentr - A data driven way to hire!"
 meta_description: "Talentr allows you to stop making hiring decisions on a hunch. Inform your candidate screening by analysing candidate profiles via a data dashboard. Perform queries and add filters on multiple data points to establish the best candidates for the role! Your business deserves best!"
-meta_image: "analysis.png" # should exist in `app/assets/images/`
+meta_image: "https://res.cloudinary.com/dqh0reqn3/image/upload/v1567170929/analysis_a5qe7n.png"
+meta_image_width:  "1200"
+meta_image_height:  "630"
 twitter_account: "@talentrio"   # required for Twitter Cards
+
