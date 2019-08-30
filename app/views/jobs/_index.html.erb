@@ -4,7 +4,7 @@
     <th>PENDING</th>
     <th>ACCEPTED</th>
     <th>TOTAL</th>
-    <th>DUE ON</th>
+    <th>DUE</th>
   </tr>
   <% @jobs.each do |job| %>
   <tr>
@@ -13,7 +13,7 @@
     <!-- Insert here job_application -->
     <td><%= job.job_applications.where(status: 'accepted').count %></td>
     <td><%= job.job_applications.count %></td>
-    <td><%= job.due_date.strftime("%d %b '%y") %></td>
+    <td><%= job.due_date.strftime("%d %b") %></td>
   </tr>
   <% end %>
 </table>
