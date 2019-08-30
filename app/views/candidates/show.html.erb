@@ -3,7 +3,7 @@
 <p><%= @candidate.email %></p>
 
 <% if params[:job_id]%>
-  <%= link_to "Go back", job_path(Job.find(params[:job_id])), class: 'nbtn nbtn-simple' %>
+  <%= link_to " « Go Back to Job Position", job_path(Job.find(params[:job_id])), class: 'nbtn nbtn-simple' %>
 <% else %>
-  <%= link_to "Go back", candidates_path, class: 'nbtn nbtn-simple' %>
+  <%= link_to " « Go to Candidates", candidates_path, class: 'nbtn nbtn-simple' %>
 <% end %>
