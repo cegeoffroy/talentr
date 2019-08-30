@@ -12,6 +12,7 @@ class CandidatesController < ApplicationController
 
   def new
     @candidate = Candidate.new
+    @job = Job.find(params[:job_id])
     authorize @candidate
   end
 
