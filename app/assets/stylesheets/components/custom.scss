@@ -52,3 +52,13 @@ a:hover {
   align-items: flex-start;
 
 }
+.home-background {
+  clear:both;
+  padding: 48px 86px;
+  display: flex;
+  justify-content: space-between;
+  background-image: asset-url('grey-bg.svg');
+  background-position: 50% calc(100% + 1px);
+  height: 210px;
+  padding: 0 86px;
+}

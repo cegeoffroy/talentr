@@ -1,4 +1,6 @@
-<h2>Sign up</h2>
+<h2 style="margin-bottom: 0px;">Sign up</h2>
+<p><%= link_to "or Log in now", new_session_path(resource_name) %></p>
+
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
@@ -18,7 +20,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up", class: "nbtn nbtn-primary" %>
+    <%= f.button :submit, "Sign up", class: "nbtn nbtn-primary", style: "width: 100%;" %>
   </div>
 <% end %>
 
