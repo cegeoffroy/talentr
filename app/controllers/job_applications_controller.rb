@@ -1,9 +1,12 @@
 require 'open-uri'
 
 class JobApplicationsController < ApplicationController
+  include ParserHelper
   before_action :authenticate_user!
 
   def create
+    c = parse
+    raise
     job = Job.find(params[:job_id])
     attachments = params[:applications][:attachments]
     attachments.each do |attachment|
