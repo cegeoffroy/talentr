@@ -72,8 +72,15 @@ class ParserService
     if lines[index - 1] == ''
       name = lines[index - 3]
       name = lines[index - 4] if name == "\n"
+      if name.split(' ').count > 3
+        name = lines[index - 4]
+        name = lines[index - 5] if name == "\n"
+      end
     else
       name = lines[index - 2]
+      if name.split(' ').count > 3
+        name = lines[index - 3]
+      end
     end
     name
   end
@@ -261,7 +268,9 @@ class ParserService
     education.each_slice(2).to_a.each do |edu|
       institute = edu[0]
       detail = edu[1]
-      full_data = detail.match(/(?<subject>.*) · \((?<start_year>\d+)[^a-zA-Z0-9]+(?<end_year>\d+)\)/)
+      if detail
+        full_data = detail.match(/(?<subject>.*) · \((?<start_year>\d+)[^a-zA-Z0-9]+(?<end_year>\d+)\)/)
+      end
       if full_data
         start_year = full_data[:start_year].to_i
         end_year = full_data[:end_year].to_i
@@ -340,10 +349,12 @@ class ParserService
   end
 
   def clean_category(category_array)
-    @tagline.split("\n").each { |e| category_array.delete(e) }
-    category_array.delete(@name)
-    @summary.split("\n").each { |e| category_array.delete(e) }
-    category_array.delete("Summary")
-    category_array
+    if category_array
+      @tagline.split("\n").each { |e| category_array.delete(e) } if @tagline
+      category_array.delete(@name)
+      @summary.split("\n").each { |e| category_array.delete(e) } if @summary
+      category_array.delete("Summary")
+      category_array
+    end
   end
 end
