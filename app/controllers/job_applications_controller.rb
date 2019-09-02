@@ -5,36 +5,34 @@ class JobApplicationsController < ApplicationController
 
   def create
     job = Job.find(params[:job_id])
-    attachments = params[:applications][:attachments]
-    attachments.each do |attachment|
-      cloudinary_result = Cloudinary::Uploader.upload(attachment.tempfile)
-      cloudinary_url = cloudinary_result["url"]
-      ### => here loop begins for each PDF uploaded
-      # TODO: upload to cloudinary - receive a link
-      # cloudinary_url = "https://res.cloudinary.com/dqh0reqn3/image/upload/v1566987213/cvtest.pdf"
-      # result = convertapi_call(cloudinary_url)
-      # => result is now a string
-      # TODO: candidate = Parser.parse(result)
-      candidate = Candidate.new(name: Faker::Name.name,
-                                email: Faker::Internet.free_email,
-                                linkedin_url: 'https://www.linkedin.com/in/dmytrotarasenko/',
-                                attachment: cloudinary_url,
-                                user: job.user)
-      candidate.save!
-      @job_application = JobApplication.new(candidate: candidate, job: job,
-                                            date: Date.today.to_datetime,
-                                            suitability: (1..100).to_a.sample)
-      authorize @job_application
-      @job_application.save!
+    if params[:applications].present? && params[:applications][:attachments].present?
+      attachments = params[:applications][:attachments]
+      attachments.each do |attachment|
+        cloudinary_result = Cloudinary::Uploader.upload(attachment.tempfile)
+        cloudinary_url = cloudinary_result["url"]
+        result_text = convertapi_call(cloudinary_url)
+        next if result_text.nil?
+
+        candidate = Candidate.new(attachment: cloudinary_url,
+                                  user: job.user)
+        ParserService.new.parse_linkedin_cv_from_text(candidate, result_text.force_encoding('UTF-8'))
+        next if candidate.id.nil?
+
+        @job_application = JobApplication.new(candidate: candidate, job: job,
+                                              date: Date.today.to_datetime,
+                                              suitability: (1..100).to_a.sample)
+        authorize @job_application
+        @job_application.save!
+      end
+    else
+      # puts "The upload didn't contain any attachments - sorry"
+      authorize JobApplication.new(job: job)
+      puts "The upload didn't contain any attachments - sorry"
     end
     ### => Here loop ends
 
     # => The below should be replaced with logic confirming all jobapplications have saved
-    if @job_application.save
-      redirect_to job_path(job)
-    else
-      redirect_to job_path(job)
-    end
+    redirect_to job_path(job)
   end
 
   private
@@ -43,7 +41,9 @@ class JobApplicationsController < ApplicationController
     ConvertApi.config.api_secret = ENV['CONVERT_API_SECRET']
     result = ConvertApi.convert('txt', {
                                   File: cloudinary_url,
-                                  PageRange: '1-20'
+                                  PageRange: '1-20',
+                                  LineLength: '2000',
+                                  EndLineChar: 'mac'
                                 },
                                 from_format: 'pdf')
     open(result.file.url).read
