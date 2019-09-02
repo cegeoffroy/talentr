@@ -5,7 +5,7 @@ class JobApplicationsController < ApplicationController
 
   def create
     job = Job.find(params[:job_id])
-    if params[:applications][:attachments]
+    if params[:applications].present? && params[:applications][:attachments].present?
       attachments = params[:applications][:attachments]
       attachments.each do |attachment|
         cloudinary_result = Cloudinary::Uploader.upload(attachment.tempfile)
@@ -25,6 +25,8 @@ class JobApplicationsController < ApplicationController
         @job_application.save!
       end
     else
+      # puts "The upload didn't contain any attachments - sorry"
+      authorize JobApplication.new(job: job)
       puts "The upload didn't contain any attachments - sorry"
     end
     ### => Here loop ends

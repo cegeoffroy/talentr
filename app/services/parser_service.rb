@@ -27,7 +27,6 @@ class ParserService
     create_info
   end
 
-
   def append_candidate
     linkedin = @websites[:websites].find { |site| site[:origin] == 'linkedin' }[:url]
     @candidate.update(name: @name, email: @email, linkedin_url: linkedin)
