@@ -11,6 +11,7 @@ class JobApplicationsController < ApplicationController
         cloudinary_result = Cloudinary::Uploader.upload(attachment.tempfile)
         cloudinary_url = cloudinary_result["url"]
         result_text = convertapi_call(cloudinary_url)
+        binding.pry
         next if result_text.nil?
 
         candidate = Candidate.new(attachment: cloudinary_url,
@@ -42,7 +43,9 @@ class JobApplicationsController < ApplicationController
     ConvertApi.config.api_secret = ENV['CONVERT_API_SECRET']
     result = ConvertApi.convert('txt', {
                                   File: cloudinary_url,
-                                  PageRange: '1-20'
+                                  PageRange: '1-20',
+                                  LineLength: '2000',
+                                  EndLineChar: 'mac'
                                 },
                                 from_format: 'pdf')
     open(result.file.url).read

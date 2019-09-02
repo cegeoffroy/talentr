@@ -34,6 +34,7 @@ class ParserService
     Info.create(candidate: candidate, meta_key: "experience", meta_value: experience)
   end
 
+
   def append_candidate(candidate, name, email, websites)
     linkedin = websites[:websites].find { |site| site[:origin] == 'linkedin' }[:url]
     candidate.update(name: name, email: email, linkedin_url: linkedin)
@@ -41,6 +42,7 @@ class ParserService
   end
 
   def remove_pagination(text)
+    binding.pry
     text.gsub!("\r", '')
     arr = text.split(/Page \d+ of \d+/)
     arr.map!(&:strip)
