@@ -1,0 +1,65 @@
+.table {
+  width: 100%;
+  border: none;
+}
+
+.table-container th {
+  font-family: Cabin;
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 16px;
+  line-height: 13px;
+  letter-spacing: 0.01em;
+  border: none;
+}
+
+.table-container td {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 11px;
+  letter-spacing: 0.01em;
+  border: none;
+  padding: 0.4rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.fa-check {
+  color: #2ED47A;
+}
+
+.fa-times {
+  color: #F7685B;
+}
+
+.fa-eye {
+  color: #707683;
+}
+
+.tx-al-r {
+  text-align: right;
+}
+
+.tx-al-c {
+  text-align: center;
+}
+
+.txt-al-l{
+  text-align: left;
+}
+
+td i {
+  margin-right: 6px;
+}
+
+td i:hover {
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.op-mid {
+  opacity: 0.5;
+}

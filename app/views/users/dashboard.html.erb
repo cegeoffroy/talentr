@@ -1,21 +1,23 @@
-<div class="title">
-  <h1>Dashboard</h1>
+<div class="dashboard-title">
+  <h3>Dashboard</h3>
   <%= link_to "New Opening", new_job_path, class: "nbtn nbtn-primary" %>
 </div>
-<div style="margin: 10px; overflow-y: auto">
-  <p><strong>New in</strong></p>
-  <%= render 'candidates/index', jobs: @candidates %>
-</div>
-<div style="display: flex; justify-content: space-around; margin-top: 20px; margin-left: 10px">
-  <div style="height: 50%; width: 50%; overflow-y: auto;">
-    <p><strong>Inbound applications</strong></p>
+<hr>
+<div class="dashboard-container">
+  <div class="top-container">
+    <p><strong>New applications</strong></p>
+    <%= render 'candidates/index', jobs: @candidates %>
   </div>
-  <div>
-    <p><strong>Open job positions (<%= @jobs.count %>)</strong></p>
-    <div style="height: 100px; overflow: auto">
-      <%= render 'jobs/index', jobs: @jobs %>
+  <hr>
+  <div class="bottom-container">
+    <div class="bottom-left-container">
+      <p><strong>Inbound applications</strong></p>
     </div>
-
+    <div>
+      <p><strong>Open job positions (<%= @jobs.count %>)</strong></p>
+      <div class="bottom-right-container">
+        <%= render 'jobs/index', jobs: @jobs %>
+      </div>
+    </div>
   </div>
 </div>
-

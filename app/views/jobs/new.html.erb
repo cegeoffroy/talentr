@@ -1,11 +1,11 @@
   <h2>New Job opening</h2>
   <div class="container-form">
   <%= simple_form_for @job do |f| %>
-    <%= f.input :title, label: 'Job Title' %>
+    <%= f.input :title, label: 'JOB TITLE' %>
     <%= f.simple_fields_for :keywords do |keywords| %>
-      <%= keywords.input :keywords, label: 'Keywords', hint: 'Add as many keywords as you like, separated with commas' %>
+      <%= keywords.input :keywords, label: 'KEYWORDS', hint: 'Add as many keywords as you like, separated with commas' %>
     <% end %>
-    <%= f.input :due_date, input_html: { class: "date-field" }, label: 'Due in', as: :string %>
+    <%= f.input :due_date, input_html: { class: "date-field" }, label: 'DUE IN', as: :string %>
   </div>
   <div class="container-btns">
     <div class="new-btn-left">
