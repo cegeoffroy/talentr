@@ -1,65 +1,72 @@
 class ParserService
-  STOP_WORDS_FILE_NAME = './app/helpers/stop-words.txt'
+  attr_accessor :stop_words_file_name
+  @@stop_words_file_name = './app/helpers/stop-words.txt'
+
   def parse_linkedin_cv_from_text(candidate, text)
-    text = remove_pagination(text)
-    histogram = get_frequency_histogram(text, STOP_WORDS_FILE_NAME)
-    tagline = get_tagline(text)
-    email = get_email(text)
-    websites = get_websites(text)
-    skills = get_top_skills(text)
-    certificates = get_certifications(text)
-    name = get_name(text)
-    phone_number = get_phone_number(text)
-    honors = get_honors(text)
-    languages = get_languages(text)
-    summary = get_summary(text)
-    education = get_education(text)
-    experience = get_experience(text)
-    certificates = clean_category(certificates, tagline, name, summary)
-    skills = clean_category(skills, tagline, name, summary)
-    honors = clean_category(honors, tagline, name, summary)
-    languages = clean_category(languages, tagline, name, summary)
-    append_candidate(candidate, name, email, websites)
-    Info.create(candidate: candidate, meta_key: "phone_number", meta_value: phone_number)
-    Info.create(candidate: candidate, meta_key: "websites", meta_value: websites)
-    Info.create(candidate: candidate, meta_key: "histogram", meta_value: histogram)
-    Info.create(candidate: candidate, meta_key: "tagline", meta_value: tagline)
-    Info.create(candidate: candidate, meta_key: "full_text", meta_value: text)
-    Info.create(candidate: candidate, meta_key: "skills", meta_value: skills)
-    Info.create(candidate: candidate, meta_key: "certificates", meta_value: certificates)
-    Info.create(candidate: candidate, meta_key: "honors", meta_value: honors)
-    Info.create(candidate: candidate, meta_key: "languages", meta_value: languages)
-    Info.create(candidate: candidate, meta_key: "summary", meta_value: summary)
-    Info.create(candidate: candidate, meta_key: "education", meta_value: education)
-    Info.create(candidate: candidate, meta_key: "experience", meta_value: experience)
+    @text = text
+    @candidate = candidate
+    @text = remove_pagination
+    @histogram = parse_frequency_histogram
+    @tagline = parse_tagline
+    @email = parse_email
+    @websites = parse_websites
+    @skills = parse_top_skills
+    @certificates = parse_certifications
+    @name = parse_name
+    @phone_number = parse_phone_number
+    @honors = parse_honors
+    @languages = parse_languages
+    @summary = parse_summary
+    @education = parse_education
+    @experience = parse_experience
+    @certificates = clean_category(@certificates)
+    @skills = clean_category(@skills)
+    @honors = clean_category(@honors)
+    @languages = clean_category(@languages)
+    append_candidate
+    create_info
   end
 
 
-  def append_candidate(candidate, name, email, websites)
-    linkedin = websites[:websites].find { |site| site[:origin] == 'linkedin' }[:url]
-    candidate.update(name: name, email: email, linkedin_url: linkedin)
-    candidate.save
+  def append_candidate
+    linkedin = @websites[:websites].find { |site| site[:origin] == 'linkedin' }[:url]
+    @candidate.update(name: @name, email: @email, linkedin_url: linkedin)
+    @candidate.save
   end
 
-  def remove_pagination(text)
-    binding.pry
-    text.gsub!("\r", '')
-    arr = text.split(/Page \d+ of \d+/)
+  def create_info
+    Info.create(candidate: @candidate, meta_key: "phone_number", meta_value: @phone_number)
+    Info.create(candidate: @candidate, meta_key: "websites", meta_value: @websites)
+    Info.create(candidate: @candidate, meta_key: "histogram", meta_value: @histogram)
+    Info.create(candidate: @candidate, meta_key: "tagline", meta_value: @tagline)
+    Info.create(candidate: @candidate, meta_key: "full_text", meta_value: @text)
+    Info.create(candidate: @candidate, meta_key: "skills", meta_value: @skills)
+    Info.create(candidate: @candidate, meta_key: "certificates", meta_value: @certificates)
+    Info.create(candidate: @candidate, meta_key: "honors", meta_value: @honors)
+    Info.create(candidate: @candidate, meta_key: "languages", meta_value: @languages)
+    Info.create(candidate: @candidate, meta_key: "summary", meta_value: @summary)
+    Info.create(candidate: @candidate, meta_key: "education", meta_value: @education)
+    Info.create(candidate: @candidate, meta_key: "experience", meta_value: @experience)
+  end
+
+  def remove_pagination
+    @text.gsub!("\r", '')
+    arr = @text.split(/Page \d+ of \d+/)
     arr.map!(&:strip)
     arr.join("\n")
   end
 
-  def line_by_line(text)
-    text.split("\n")
+  def line_by_line
+    @text.split("\n")
   end
 
-  def email?(website, text)
-    index = text.index(website)
-    text[index + website.length] == '@' || text[index - 1] == '@'
+  def email?(website)
+    index = @text.index(website)
+    @text[index + website.length] == '@' || @text[index - 1] == '@'
   end
 
-  def get_name(text)
-    lines = line_by_line(text)
+  def parse_name
+    lines = line_by_line
     index = lines.find_index('Summary')
     return nil unless index
 
@@ -72,8 +79,8 @@ class ParserService
     name
   end
 
-  def get_tagline(text)
-    lines = line_by_line(text)
+  def parse_tagline
+    lines = line_by_line
     index = lines.find_index('Summary')
     return nil unless index
 
@@ -85,31 +92,31 @@ class ParserService
     tagline
   end
 
-  def get_email(text)
+  def parse_email
     email_regex = /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-    text.match(email_regex)[0]
+    @text.match(email_regex)[0]
   end
 
-  def get_phone_number(text)
+  def parse_phone_number
     phone_number = nil
-    end_index = text.index('Mobile')
+    end_index = @text.index('Mobile')
     return phone_number unless end_index
 
     break_index = end_index
-    break_index -= 1 until text[break_index] == "\n"
-    phone_number = text.slice(break_index..end_index)
+    break_index -= 1 until @text[break_index] == "\n"
+    phone_number = @text.slice(break_index..end_index)
     phone_number.gsub(/[^+\d]/, '')
   end
 
-  def get_websites(text)
+  def parse_websites
     hash = {}
     arr = []
-    sites = text.scan(/(?<full>(\s|^)(www\.)*(\w+\.)+\w{2,3}(\/|\w|\d)+)/)
+    sites = @text.scan(/(?<full>(\s|^)(www\.)*(\w+\.)+\w{2,3}(\/|\w|\d)+)/)
     sites.each do |site|
       site = site[0]
       site.chomp!
       site.gsub!("\n", '')
-      next if email?(site, text)
+      next if email?(site)
 
       arr << if site.include?('linkedin')
                { url: site, origin: 'linkedin' }
@@ -125,10 +132,10 @@ class ParserService
     hash
   end
 
-  def stop_word?(word, file_name)
+  def stop_word?(word)
     # true or false reading from stop_words.txt
     word_array = []
-    File.open(file_name, "r").each_line do |line|
+    File.open(@@stop_words_file_name, "r").each_line do |line|
       word_array << line.chomp
     end
     word_array.include?(word)
@@ -142,26 +149,26 @@ class ParserService
     word.match?(/^\W+$/)
   end
 
-  def exclude_word?(word, stop_words_file_name)
-    stop_word?(word, stop_words_file_name) || number?(word) || non_word_only?(word) || word.empty?
+  def exclude_word?(word)
+    stop_word?(word) || number?(word) || non_word_only?(word) || word.empty?
   end
 
-  def get_frequency_histogram(text, stop_words_file_name)
+  def parse_frequency_histogram
     histogram = Hash.new(0)
-    text.chomp.split("\n").each do |line|
+    @text.chomp.split("\n").each do |line|
       line.chomp.split(' ').each do |word|
         clean_word = word.gsub(/(\W$)|(\Ws$)/, "").downcase
-        histogram[clean_word] += 1 unless exclude_word?(clean_word, stop_words_file_name)
+        histogram[clean_word] += 1 unless exclude_word?(clean_word)
       end
     end
     histogram.sort_by { |_key, value| - value }.to_h
   end
 
-  def get_top_skills(text)
-    if text.index('Top Skills')
+  def parse_top_skills
+    if @text.index('Top Skills')
       skills = []
-      init_position = text.index('Top Skills') + 10
-      sliced_text = text.slice(init_position..-1)
+      init_position = @text.index('Top Skills') + 10
+      sliced_text = @text.slice(init_position..-1)
       if sliced_text[0] == "\n"
         final_position = sliced_text.index("\n\n")
         skills_string = sliced_text.slice!(0..final_position).strip
@@ -174,11 +181,11 @@ class ParserService
     end
   end
 
-  def get_certifications(text)
+  def parse_certifications
     certifications = []
-    if text.index('Certifications')
-      init_position = text.index('Certifications') + 14
-      sliced_text = text.slice(init_position..-1)
+    if @text.index('Certifications')
+      init_position = @text.index('Certifications') + 14
+      sliced_text = @text.slice(init_position..-1)
       if sliced_text[0] == "\n"
         final_position = sliced_text.index("\n\n")
         certifications_string = sliced_text.slice!(0..final_position).strip
@@ -192,11 +199,11 @@ class ParserService
     certifications
   end
 
-  def get_honors(text)
+  def parse_honors
     honors = []
-    if text.index('Honors-Awards')
-      init_position = text.index('Honors-Awards') + 13
-      sliced_text = text.slice(init_position..-1)
+    if @text.index('Honors-Awards')
+      init_position = @text.index('Honors-Awards') + 13
+      sliced_text = @text.slice(init_position..-1)
       if sliced_text[0] == "\n"
         final_position = sliced_text.index("\n\n")
         honors_string = sliced_text.slice!(0..final_position).strip
@@ -210,12 +217,12 @@ class ParserService
     honors
   end
 
-  def get_languages(text)
+  def parse_languages
     hash = {}
-    if text.index('Languages')
+    if @text.index('Languages')
       arr = []
-      init_position = text.index('Languages') + 9
-      sliced_text = text.slice(init_position..-1).strip
+      init_position = @text.index('Languages') + 9
+      sliced_text = @text.slice(init_position..-1).strip
       final_position = sliced_text.index("\n")
       languages_string = sliced_text.slice!(0..final_position).strip
       languages_array = languages_string.scan(/(?<language>[a-zA-Z]+ )(?<skill>\([a-zA-Z ]+\))/)
@@ -227,11 +234,11 @@ class ParserService
     hash
   end
 
-  def get_summary(text)
+  def parse_summary
     summary_string = nil
-    if text.index('Summary')
-      init_position = text.index('Summary') + 7
-      sliced_text = text.slice(init_position..-1)
+    if @text.index('Summary')
+      init_position = @text.index('Summary') + 7
+      sliced_text = @text.slice(init_position..-1)
       if sliced_text[0..1] == "\n\n"
         final_position = sliced_text.index("\n\n\n")
         summary_string = sliced_text.slice!(0..final_position).strip
@@ -243,13 +250,13 @@ class ParserService
     summary_string
   end
 
-  def get_education(text)
+  def parse_education
     hash = {}
     arr = []
-    index = text =~ /\neducation\n/i
+    index = @text =~ /\neducation\n/i
     return hash unless index
 
-    education = text[index..-1].strip.split("\n")
+    education = @text[index..-1].strip.split("\n")
     education.delete('')
     education.delete('Education')
     education.each_slice(2).to_a.each do |edu|
@@ -272,15 +279,15 @@ class ParserService
     hash
   end
 
-  def get_experience(text)
+  def parse_experience
     dates_regex = /(?<start_date>(\b\d{1,2}\D{0,3})?\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|(Nov|Dec)(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})) - ((?<end_date>(\b\d{1,2}\D{0,3})?\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|(Nov|Dec)(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2}))|(?<present>Present))/
     hash = {}
     arr = []
-    exp_index = text =~ /\nexperience\n/i
-    ed_index = text =~ /\neducation\n/i
+    exp_index = @text =~ /\nexperience\n/i
+    ed_index = @text =~ /\neducation\n/i
     return hash unless exp_index && ed_index
 
-    experience_string = text[exp_index..ed_index]
+    experience_string = @text[exp_index..ed_index]
     experience_array = experience_string.split("\n")
     experience_array.delete('')
     experience_array.delete('Experience')
@@ -333,10 +340,10 @@ class ParserService
     hash
   end
 
-  def clean_category(category_array, tagline, name, summary)
-    tagline.split("\n").each { |e| category_array.delete(e) }
-    category_array.delete(name)
-    summary.split("\n").each { |e| category_array.delete(e) }
+  def clean_category(category_array)
+    @tagline.split("\n").each { |e| category_array.delete(e) }
+    category_array.delete(@name)
+    @summary.split("\n").each { |e| category_array.delete(e) }
     category_array.delete("Summary")
     category_array
   end

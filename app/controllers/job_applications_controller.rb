@@ -11,14 +11,10 @@ class JobApplicationsController < ApplicationController
         cloudinary_result = Cloudinary::Uploader.upload(attachment.tempfile)
         cloudinary_url = cloudinary_result["url"]
         result_text = convertapi_call(cloudinary_url)
-        binding.pry
         next if result_text.nil?
 
         candidate = Candidate.new(attachment: cloudinary_url,
                                   user: job.user)
-        # open("new.txt", "w") do |file|
-        #   file << result_text.force_encoding('UTF-8')
-        # end
         ParserService.new.parse_linkedin_cv_from_text(candidate, result_text.force_encoding('UTF-8'))
         next if candidate.id.nil?
 
