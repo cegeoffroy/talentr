@@ -1,18 +1,28 @@
-<div style="height: 50%; overflow-y: auto">
+<div class="table-container">
   <% if @candidates.any? %>
-    <table style="width:100%">
-      <tr>
+    <table class="table">
+      <tr class="op-mid">
         <th></th>
         <th>EMAIL</th>
-        <th>RECEIVED</th>
-        <th>ACTIONS</th>
+        <th>JOB OPENING</th>
+        <th class="tx-al-c">SUITABILITY</th>
+        <th class="tx-al-r">RECEIVED</th>
+        <th class="tx-al-r">ACTIONS</th>
       </tr>
       <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= candidate.name%></td>
+        <td><strong><%= candidate.name%></strong></td>
         <td><%= candidate.email %></td>
-        <td><%= candidate.days_since_applied %> days ago</td>
-        <td><%= link_to "show", candidate_path(candidate) %></td>
+        <td></td>
+        <td class="tx-al-c"></td>
+        <td class="tx-al-r" ><%= candidate.days_since_applied %> days ago</td>
+        <td class="tx-al-r">
+          <i class="fas fa-check"></i>
+          <i class="fas fa-times"></i>
+          <%= link_to candidate_path(candidate) do%>
+          <i class="far fa-eye"></i>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     </table>

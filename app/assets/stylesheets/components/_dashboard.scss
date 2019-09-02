@@ -1,0 +1,33 @@
+.dashboard-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-title h1 {
+  font-size: 18px;
+}
+
+.top-container{
+  height: 50%;
+  margin: 20px;
+}
+
+.bottom-container {
+  display: flex;
+  justify-content: space-around;
+  height: 50%;
+  margin: 20px;
+}
+
+.bottom-left-container{
+  width: 50%;
+}
+
+.bottom-right-container {
+  overflow-y: auto;
+}
+
+.table-container {
+  height: 220px;
+  overflow-y: auto;
+}

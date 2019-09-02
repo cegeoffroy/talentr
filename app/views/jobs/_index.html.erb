@@ -1,6 +1,6 @@
-<div>
-  <table style="width:100%">
-    <tr>
+<div class="table-container">
+  <table class="table">
+    <tr class="tx-al-c op-mid">
       <th></th>
       <th>PENDING</th>
       <th>ACCEPTED</th>
@@ -9,12 +9,12 @@
     </tr>
     <% @jobs.each do |job| %>
     <tr>
-      <td><%= link_to job.title, job_path(job) %></td>
-      <td><%= job.job_applications.where(status: 'pending').count %></td>
+      <td><strong><%= link_to job.title, job_path(job) %></strong></td>
+      <td class="tx-al-c"><%= job.job_applications.where(status: 'pending').count %></td>
       <!-- Insert here job_application -->
-      <td><%= job.job_applications.where(status: 'accepted').count %></td>
-      <td><%= job.job_applications.count %></td>
-      <td><%= job.due_date.strftime("%d %b") %></td>
+      <td class="tx-al-c"><%= job.job_applications.where(status: 'accepted').count %></td>
+      <td class="tx-al-c"><%= job.job_applications.count %></td>
+      <td class="tx-al-c"><%= job.due_date.strftime("%d %b") %></td>
     </tr>
     <% end %>
   </table>
