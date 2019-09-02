@@ -1,11 +1,49 @@
-module ParserHelper
-  def parse_linkedin_cv_from_text
-    candidate = Candidate.new
+class ParserService
+  STOP_WORDS_FILE_NAME = './app/helpers/stop-words.txt'
+  def parse_linkedin_cv_from_text(candidate, text)
+    text = remove_pagination(text)
+    histogram = get_frequency_histogram(text, STOP_WORDS_FILE_NAME)
+    tagline = get_tagline(text)
+    email = get_email(text)
+    websites = get_websites(text)
+    skills = get_top_skills(text)
+    certificates = get_certifications(text)
+    name = get_name(text)
+    phone_number = get_phone_number(text)
+    honors = get_honors(text)
+    languages = get_languages(text)
+    summary = get_summary(text)
+    education = get_education(text)
+    experience = get_experience(text)
+    certificates = clean_category(certificates, tagline, name, summary)
+    skills = clean_category(skills, tagline, name, summary)
+    honors = clean_category(honors, tagline, name, summary)
+    languages = clean_category(languages, tagline, name, summary)
+    append_candidate(candidate, name, email, websites)
+    Info.create(candidate: candidate, meta_key: "phone_number", meta_value: phone_number)
+    Info.create(candidate: candidate, meta_key: "websites", meta_value: websites)
+    Info.create(candidate: candidate, meta_key: "histogram", meta_value: histogram)
+    Info.create(candidate: candidate, meta_key: "tagline", meta_value: tagline)
+    Info.create(candidate: candidate, meta_key: "full_text", meta_value: text)
+    Info.create(candidate: candidate, meta_key: "skills", meta_value: skills)
+    Info.create(candidate: candidate, meta_key: "certificates", meta_value: certificates)
+    Info.create(candidate: candidate, meta_key: "honors", meta_value: honors)
+    Info.create(candidate: candidate, meta_key: "languages", meta_value: languages)
+    Info.create(candidate: candidate, meta_key: "summary", meta_value: summary)
+    Info.create(candidate: candidate, meta_key: "education", meta_value: education)
+    Info.create(candidate: candidate, meta_key: "experience", meta_value: experience)
+  end
+
+  def append_candidate(candidate, name, email, websites)
+    linkedin = websites[:websites].find { |site| site[:origin] == 'linkedin' }[:url]
+    candidate.update(name: name, email: email, linkedin_url: linkedin)
+    candidate.save
   end
 
   def remove_pagination(text)
+    text.gsub!("\r", '')
     arr = text.split(/Page \d+ of \d+/)
-    arr.map! { |item| item.strip }
+    arr.map!(&:strip)
     arr.join("\n")
   end
 
@@ -46,7 +84,8 @@ module ParserHelper
   end
 
   def get_email(text)
-    text.match(/[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)[0]
+    email_regex = /[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    text.match(email_regex)[0]
   end
 
   def get_phone_number(text)
@@ -218,9 +257,11 @@ module ParserHelper
       if full_data
         start_year = full_data[:start_year].to_i
         end_year = full_data[:end_year].to_i
+        start_date = DateTime.new(start_year, 1, 1)
+        end_date = DateTime.new(end_year, 1, 1)
         subject = full_data[:subject]
         arr << { institute: institute, subject: subject,
-                 start_year: start_year, end_year: end_year}
+                 start_date: start_date, end_date: end_date }
       else
         arr << { institute: institute, subject: detail }
       end
@@ -229,30 +270,72 @@ module ParserHelper
     hash
   end
 
-  content = File.read('./big-cv.txt')
-  content = remove_pagination(content)
-  content_historgram = get_frequency_histogram(content, './stop-words.txt')
-  tagline = get_tagline(content)
-  p tagline
-  p content_historgram
-  email = get_email(content)
-  p email
-  websites = get_websites(content)
-  p websites
-  skills = get_top_skills(content)
-  p skills
-  cs = get_certifications(content)
-  p cs
-  name = get_name(content)
-  p name
-  phone_number = get_phone_number(content)
-  p phone_number
-  honors = get_honors(content)
-  p honors
-  languages = get_languages(content)
-  p languages
-  summary = get_summary(content)
-  p summary
-  education = get_education(content)
-  p education
+  def get_experience(text)
+    dates_regex = /(?<start_date>(\b\d{1,2}\D{0,3})?\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|(Nov|Dec)(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})) - ((?<end_date>(\b\d{1,2}\D{0,3})?\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|(Nov|Dec)(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2}))|(?<present>Present))/
+    hash = {}
+    arr = []
+    exp_index = text =~ /\nexperience\n/i
+    ed_index = text =~ /\neducation\n/i
+    return hash unless exp_index && ed_index
+
+    experience_string = text[exp_index..ed_index]
+    experience_array = experience_string.split("\n")
+    experience_array.delete('')
+    experience_array.delete('Experience')
+    dates_indexes = []
+    experience_array.each_with_index do |line, index|
+      dates_indexes << index if line.match?(dates_regex)
+    end
+    dates_indexes.each_with_index do |index, date_index|
+      line = experience_array[index]
+      match_data = line.match(dates_regex)
+      if match_data[:end_date]
+        end_date_array = match_data[:end_date].split(' ')
+        end_date = DateTime.new(end_date_array[1].to_i,
+                                Date::MONTHNAMES.index(end_date_array[0]), 1)
+      else
+        end_date = match_data[:present]
+      end
+      start_date_array = match_data[:start_date].split(' ')
+      start_date = DateTime.new(start_date_array[1].to_i,
+                                Date::MONTHNAMES.index(start_date_array[0]), 1)
+      data_hash = { start_date: start_date,
+                    end_date: end_date }
+      position = line =~ dates_regex
+      if position.positive?
+        info = line[0..position - 1].strip
+        data_hash[:position] = info
+      else
+        position = experience_array[index - 1]
+        if dates_indexes.include?(index - 2)
+          cur_index = index - 2
+          cur_index -= 2 while dates_indexes.include?(cur_index)
+          company = experience_array[cur_index - 1]
+        elsif dates_indexes.include?(index + 2)
+          company = experience_array[index - 3]
+        else
+          company = experience_array[index - 2]
+        end
+        data_hash[:position] = position
+        data_hash[:company] = company
+      end
+      if date_index != dates_indexes.length - 1
+        description = experience_array[index + 1..dates_indexes[date_index + 1] - 3].join("\n")
+      else
+        description = experience_array[index + 1..-1].join("\n")
+      end
+      data_hash[:description] = description
+      arr << data_hash
+    end
+    hash[:items] = arr
+    hash
+  end
+
+  def clean_category(category_array, tagline, name, summary)
+    tagline.split("\n").each { |e| category_array.delete(e) }
+    category_array.delete(name)
+    summary.split("\n").each { |e| category_array.delete(e) }
+    category_array.delete("Summary")
+    category_array
+  end
 end
