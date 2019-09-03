@@ -23,7 +23,7 @@
           <%= link_to job_application_path(application, q: 'reject'), method: :patch, remote: true do %>
             <i class="fas fa-times"></i>
           <% end %>
-          <%= link_to candidate_path(application.candidate) do %>
+          <%= link_to candidate_path(application.candidate, job_id: application.job.id) do %>
             <i class="far fa-eye"></i>
           <% end %>
         </td>

@@ -1,0 +1,19 @@
+.candidate-show-container {
+  h2 {
+    margin: 0;
+  }
+
+  .key-data {
+    display: flex;
+  }
+
+  .left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    i {
+      font-size: 25px;
+    }
+  }
+}
