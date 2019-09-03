@@ -1,3 +1,7 @@
+.container-form {
+  width: 700px;
+}
+
 .simple_form input {
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
@@ -19,4 +23,46 @@
   letter-spacing: 0.02em;
   color: #818E9B;
   opacity: 0.9;
+}
+
+.simple_form association {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.question {
+  display: flex;
+  font-family: Cabin;
+  font-size: 14px;
+  color: #818E9B;
+  width: 700px;
+  margin-top: 40px;
+}
+
+.fa-toggle-on {
+  font-size: 20px;
+}
+
+.flash {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  margin: 8px;
+}
+
+.flash-success {
+  border: 2px solid #1EDD88;
+}
+
+.flash-warning {
+  border: 2px solid #FFC65A;
+}
+
+.flash-danger {
+  border: 2px solid #FD1015;
 }

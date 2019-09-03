@@ -10,4 +10,8 @@ Rails.application.routes.draw do
     resources :job_applications, only: [:new, :create]
   end
   resources :candidates, only: [:new, :index, :show]
+  namespace :charts do
+    get 'new_candidates'
+  end
+  resources :users, only: [:show, :update]
 end

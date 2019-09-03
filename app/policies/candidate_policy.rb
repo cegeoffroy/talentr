@@ -12,4 +12,8 @@ class CandidatePolicy < ApplicationPolicy
   def new?
     true
   end
+
+  def new_candidates?
+    true
+  end
 end
