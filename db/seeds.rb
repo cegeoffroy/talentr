@@ -6,6 +6,35 @@ UNIVERSITIES = %w(University\ of\ Surrey University\ of\ Oxford University\ of\ 
                   UCL Kings\ College)
 SKILLS = %w(Accounting Enterpreneurship Microsoft\ Office Ruby Investment Web\ Development)
 
+URLS = %w(http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439799/uy2orz3gm2esrr5r2vqq.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567431718/die0teufqwqcgakqidmh.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439553/lrk96piy114vjhzgaufa.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567440193/zuvito0egrckudlinkwh.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567440873/a3qwnfpcjhnedonu2qp9.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441097/fujy7fktrmhs6gl0y6tp.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441398/wmnu8a4edguf1ehsyq6s.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441462/c2rc9f3iu0muiwdglxq0.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441516/sjsnnl9ij7dqff74sedd.pdf)
+FILENAMES = %w(./ahmad.txt ./alwali.txt ./ben.txt ./dima.txt ./evia.txt ./shivam.txt ./wesley.txt
+               ./rich-cv.txt )
+
+def get_text_from_url(url)
+  ConvertApi.config.api_secret = ENV['CONVERT_API_SECRET']
+  result = ConvertApi.convert('txt', {
+                                File: url,
+                                PageRange: '1-20',
+                                LineLength: '2000',
+                                EndLineChar: 'mac'
+                              },
+                              from_format: 'pdf')
+  text = open(result.file.url).read
+  text.force_encoding('UTF-8')
+end
+
+def get_text_from_file(filename)
+  File.read(filename)
+end
+
 JobApplication.destroy_all
 JobKeyword.destroy_all
 Keyword.destroy_all
@@ -71,25 +100,27 @@ Job.find_each do |job|
     JobKeyword.create(job: job, keyword: Keyword.order('RANDOM()').first)
   end
   puts '4 keywords per job created!'
+  puts 'creating 7 candidates per job ...'
+  filenames = FILENAMES.dup
+  links = URLS.dup
+  7.times do
+    url = links.delete_at(rand(links.length))
+    # text = get_text_from_url(url)
+    filename = filenames.delete_at(rand(filenames.length))
+    # filename = FILENAMES.sample
+    text = get_text_from_file(filename)
+    candidate = Candidate.new(attachment: url,
+                              user: job.user)
+    ParserService.new.parse_linkedin_cv_from_text(candidate, text)
 
-  puts 'creating 3 candidates per job ...'
-  3.times do
-    c = Candidate.new(name: Faker::Name.name,
-                     email: Faker::Internet.free_email,
-                     linkedin_url: 'https://www.linkedin.com/in/dmytrotarasenko/')
-    c.user = job.user
-    c.save!
-    Info.create(candidate: c, meta_key: "experience", meta_value: (0..10).to_a.sample)
-    Info.create(candidate: c, meta_key: "education", meta_value: UNIVERSITIES.sample)
-    Info.create(candidate: c, meta_key: "tagline", meta_value: Faker::GreekPhilosophers.quote)
-    Info.create(candidate: c, meta_key: "language", meta_value: "English")
-    Info.create(candidate: c, meta_key: "skill", meta_value: SKILLS.sample)
-    JobApplication.create(job: job, candidate: c,
-                    date: Date.today.to_datetime - (1..20).to_a.sample.days,
-                    status: "pending", suitability: (1..100).to_a.sample)
+    application = JobApplication.create(job: job, candidate: candidate,
+                                        date: Date.today.to_datetime - (1..20).to_a.sample.days,
+                                        status: "pending")
+    suitability = SuitabilityService.new.add_suitability_to_application(application)
+    application.suitability = suitability
+    puts "created candidate"
   end
-  puts '3 candidates per job created!'
-
+  puts '7 candidates per job created!'
 
 end
 

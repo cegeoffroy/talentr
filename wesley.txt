@@ -1,0 +1,129 @@
+
+
+
+
+Contact
+07824470406 (Mobile)
+westleyandrew@hotmail.com
+www.linkedin.com/in/ westleyandrew (LinkedIn)
+
+Top Skills
+IP VoIP
+Routing
+Westley Andrew
+Full Stack Developer - Looking for opportunities in London London, Greater London, United Kingdom
+Summary
+After a number of years working as an engineer in the telecom industry I made the decision to change career path and become a fullstack developer . I have recently completed the top rated Le Wagon coding bootcamp and I am keen to develop my skills and further my career in a full time position.
+
+Experience
+Liquid Telecom
+VoiP Architect and Deployment Manager May 2017 - June 2019 (2 years 2 months) London, United Kingdom
+From May 2017 I had a role as a VoiP Architect and Deployment Manager working on a project to deploy a Metaswitch Unified Communications solution in six different African countries. During the project I also made use of my voice background to take part in acceptance testing and general voice operations. The role involved:
+
+• Extensive training on the Metaswitch IMS solution
+• Creation of detailed project implementation plans. Co-ordinating and planning hardware installation and commissioning
+• Travelling to Africa to assist with installation and commissioning of equipment
+• Working closely with other internal teams such as Product, Engineering, IT, Procurement, Operations, Marketing, Sales, Service Delivery and local in-country staff. Reporting regularly to immediate superiors and project stakeholders. Working with vendor project managers and support staff
+• Working on migration plans for the replacement of existing voice networks
+• Leading weekly status meetings, ad-hoc meetings and vendor meetings as necessary
+• Managing project issue identification, tracking and resolution or escalation as required
+• Acceptance testing and troubleshooting of platforms after commissioning
+• Creation of project, product and technical documentation
+
+Page 1 of 4
+
+
+
+• Assisting with the creation of test plans
+• Ensuring that network changes were properly planned and implemented
+
+Liquid Telecom
+7 years 10 months
+Voice Network Manager
+December 2014 - April 2018 (3 years 5 months) London, United Kingdom
+Between July 2010 and April 2018 I worked as a Senior VoiP Engineer and then a Voice Network Manager in the Engineering department of Liquid Telecom.
+
+While in these roles I had the following responsibilities:
+
+• Configuration and testing of SS7 and SIP  interconnects with customers and suppliers on the Huawei and Clarent Verso platforms
+• Planning and execution of circuit migrations and hardware moves. Ordering of circuits with third parties such as Telehouse and Epsilon
+• Data centre work including racking, powering and connecting equipment. Working with krone blocks/cabling to provision and test E1 circuits
+• Liaison with vendors to resolve hardware and software faults. Vendors have included Huawei and Cisco Partners
+• Management and planning of software and hardware upgrades
+• Formed part of the team responsible for deploying, testing and provisioning a Huawei NGN switch in Johannesburg in 2011
+• Formed part of the team responsible for deploying, testing and provisioning a Huawei NGN    switch in London in 2014. The project was to replace an
+aging Clarent Verso switch so all existing SS7 and SIP interconnects had to be migrated
+• Provision of technical support to internal and external groups
+• Support and network monitoring of all voice equipment in the Liquid Telecom network
+• Management of major voice network outages/issues
+• On-call and out of hours network support.
+• Mentoring and training of junior engineers
+• Development of close working relationships with key engineers in external companies, both suppliers and customers
+• Assisted in the deployment, testing and operation of a Cisco CUCM platform
+Senior VoiP Engineer
+Page 2 of 4
+
+
+
+July 2010 - November 2014 (4 years 5 months) As above.
+
+Level 3 Communications
+10 years 2 months
+Voice Operations Engineer
+July 2004 - June 2010 (6 years)
+I worked with the Level 3 VoiP platform as an Operations Engineer. The role had a number of responsibilities:
+
+• Configuration and testing of SS7 interconnects with customers and vendors
+• Configuration and testing of SIP interconnects with customers and vendors
+• Liaison with vendors to resolve hardware and software faults
+• Management of software and hardware upgrades
+• Provision of Tier 3 support to customer facing, network operations and product management personnel
+• Management of routing changes and routing plans
+Network Engineer
+April 2002 - June 2004 (2 years 3 months)
+I moved into a more general role as a Network Engineer which initially involved supporting Level 3’s US Managed Modem platform as part of a "follow the sun" network management strategy. I then moved into Level 3's European Network Operations Centre, which is responsible for dealing with customer and network faults for all of Level 3's Transmission, IP and Managed Modem products.
+Softswitch Operations Engineer
+May 2000 - April 2002 (2 years)
+I worked within the Softswitch Operations group during my first two years  at Level 3, which was responsible for the support and maintenance of the European Managed Modem network. The network consisted of Nortel CVX Signalling Gateway's, CVX 1800 Network Access Servers, Lucent TNT
+Network Access Servers, AIC Radius servers and Cisco switches and routers.
+
+MCI Worldcom
+Network Management Design Engineer
+November 1998 - April 2000 (1 year 6 months)
+I was a member of the Network Management design group within MCI Worldcom’s International Engineering division. The role involved work on
+
+Page 3 of 4
+
+
+
+projects to deploy Network Management Systems into the MCI Worldcom European Network.
+
+Ericsson Telecom
+Senior Design Engineer
+October 1994 - November 1998 (4 years 2 months) Burgess Hill
+While employed by Ericsson I worked with their virtual PBX product, BGC (Business Group Communications), which forms part of the telephony software on Ericsson's AXE10 switch. The role mainly involved in software design, development and function testing within a number of subsystems within BGC over several product cycles.
+
+
+Education
+Le Wagon
+Full Stack Developer, Web Development · (2019 - 2019)
+University of Strathclyde
+MSc, Communications, Control and Digital Signal Processing · (1993 - 1994)
+Heriot-Watt University
+B.Eng, Electrical and Electronic Engineering · (1989 - 1993)
+Robert Gordon's College, Aberdeen
+· (1983 - 1989)
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 4 of 4

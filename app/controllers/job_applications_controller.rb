@@ -15,14 +15,16 @@ class JobApplicationsController < ApplicationController
 
         candidate = Candidate.new(attachment: cloudinary_url,
                                   user: job.user)
-        ParserService.new.parse_linkedin_cv_from_text(candidate, result_text.force_encoding('UTF-8'))
+        ParserService.new.parse_linkedin_cv_from_text(candidate,
+                                                      result_text.force_encoding('UTF-8'))
         next if candidate.id.nil?
 
-        @job_application = JobApplication.new(candidate: candidate, job: job,
-                                              date: Date.today.to_datetime,
-                                              suitability: (1..100).to_a.sample)
-        authorize @job_application
+        @job_application = JobApplication.create(candidate: candidate, job: job,
+                                                date: Date.today.to_datetime)
+        suitability = SuitabilityService.new.add_suitability_to_application(@job_application)
+        @job_application.suitability = suitability
         @job_application.save!
+        authorize @job_application
       end
     else
       # puts "The upload didn't contain any attachments - sorry"
