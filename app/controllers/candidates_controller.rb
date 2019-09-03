@@ -11,6 +11,8 @@ class CandidatesController < ApplicationController
   end
 
   def show
+    @job = nil
+    @job = Job.find(params[:job_id]) if params[:job_id]
     authorize @candidate
   end
 

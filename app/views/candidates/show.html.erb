@@ -1,8 +1,19 @@
-<h2><%= @candidate.name %></h2>
-<p><%= @candidate.email %></p>
-
-<% if params[:job_id]%>
-  <%= link_to " « Go Back to Job Position", job_path(Job.find(params[:job_id])), class: 'nbtn nbtn-simple' %>
-<% else %>
-  <%= link_to " « Go to Candidates", candidates_path, class: 'nbtn nbtn-simple' %>
-<% end %>
+<div class="candidate-show-container">
+  <div class="key-data">
+    <div class="left">
+      <h2><%= @candidate.name %></h2>
+      <% if @candidate.attachment %>
+        <%= link_to @candidate.attachment, target: "_blank" do %>
+          <i class="fas fa-file-pdf"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="right">
+    </div>
+  </div>
+  <% if params[:job_id]%>
+    <%= link_to " « Go Back to Job Position", job_path(Job.find(params[:job_id])), class: 'nbtn nbtn-simple' %>
+  <% else %>
+    <%= link_to " « Go to Candidates", candidates_path, class: 'nbtn nbtn-simple' %>
+  <% end %>
+</div>
