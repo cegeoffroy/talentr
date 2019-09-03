@@ -100,12 +100,14 @@ Job.find_each do |job|
     JobKeyword.create(job: job, keyword: Keyword.order('RANDOM()').first)
   end
   puts '4 keywords per job created!'
-  sample = FILENAMES
   puts 'creating 7 candidates per job ...'
+  filenames = FILENAMES.dup
+  links = URLS.dup
   7.times do
-    url = URLS.sample
+    url = links.delete_at(rand(links.length))
     # text = get_text_from_url(url)
-    filename = FILENAMES.sample
+    filename = filenames.delete_at(rand(filenames.length))
+    # filename = FILENAMES.sample
     text = get_text_from_file(filename)
     candidate = Candidate.new(attachment: url,
                               user: job.user)
