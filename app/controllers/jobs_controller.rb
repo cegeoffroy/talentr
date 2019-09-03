@@ -30,6 +30,14 @@ class JobsController < ApplicationController
     authorize @job
   end
 
+  def filter
+    @job = Job.find(params[:job_id])
+    authorize @job
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def set_job

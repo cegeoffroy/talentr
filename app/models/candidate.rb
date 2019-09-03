@@ -10,4 +10,8 @@ class Candidate < ApplicationRecord
   def websites
     infos.where(meta_key: 'websites')[0].meta_value[:websites]
   end
+
+  FILTERS = ['Suitability score', 'Experience', 'Experience years',
+             'Relevant Experience years', 'Education years', 'Skills']
+  COMPARATORS = ['contains', 'exactly equals', '>', '<']
 end
