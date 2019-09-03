@@ -37,6 +37,18 @@ class JobApplicationsController < ApplicationController
     redirect_to job_path(job)
   end
 
+  def update
+    @job_application = JobApplication.find(params[:id])
+    authorize @job_application
+    status = params[:q]
+    if ['accept', 'reject'].include?(status)
+      @job_application.status = status
+      @job_application.save
+    else
+      @job_application.id = nil
+    end
+  end
+
   private
 
   def convertapi_call(cloudinary_url)

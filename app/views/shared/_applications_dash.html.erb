@@ -1,0 +1,36 @@
+<div class="table-container">
+  <% if @applications.any? %>
+    <table class="table">
+      <tr class="op-mid">
+        <th></th>
+        <th>EMAIL</th>
+        <th>JOB OPENING</th>
+        <th class="tx-al-c">SUITABILITY</th>
+        <th class="tx-al-r">RECEIVED</th>
+        <th class="tx-al-r">ACTIONS</th>
+      </tr>
+      <% @applications.each do |application| %>
+      <tr data-application-id="<%= application.id %>">
+        <td><strong><%= application.candidate.name%></strong></td>
+        <td><%= application.candidate.email %></td>
+        <td><%= application.job.title %></td>
+        <td class="tx-al-c"><%= application.suitability %>%</td>
+        <td class="tx-al-r" ><%= application.candidate.days_since_applied %> days ago</td>
+        <td class="tx-al-r">
+          <%= link_to job_application_path(application, q: 'accept'), method: :patch, remote: true do %>
+            <i class="fas fa-check"></i>
+          <% end %>
+          <%= link_to job_application_path(application, q: 'reject'), method: :patch, remote: true do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+          <%= link_to candidate_path(application.candidate) do %>
+            <i class="far fa-eye"></i>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>You have no outstanding applications 😢</p>
+  <% end %>
+</div>

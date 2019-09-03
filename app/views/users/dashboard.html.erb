@@ -5,8 +5,8 @@
 <hr>
 <div class="dashboard-container">
   <div class="top-container">
-    <p><strong>New applications</strong></p>
-    <%= render 'candidates/index', candidate: @candidates %>
+    <p><strong>Outstanding applications (<%= @count %>)</strong></p>
+    <%= render 'shared/applications_dash', candidate: @applications %>
   </div>
   <hr>
   <div class="bottom-container">

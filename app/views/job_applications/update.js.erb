@@ -1,0 +1,5 @@
+if (<%= !@job_application.id.nil? %>) {
+  document.querySelector("[data-application-id='<%= @job_application.id %>']").remove();
+}
+
+

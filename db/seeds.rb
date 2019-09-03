@@ -118,6 +118,7 @@ Job.find_each do |job|
                                         status: "pending")
     suitability = SuitabilityService.new.add_suitability_to_application(application)
     application.suitability = suitability
+    application.save
     puts "created candidate"
   end
   puts '7 candidates per job created!'

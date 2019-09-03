@@ -8,4 +8,8 @@ class JobApplicationPolicy < ApplicationPolicy
   def create?
     record.job.user == user
   end
+
+  def update?
+    create?
+  end
 end
