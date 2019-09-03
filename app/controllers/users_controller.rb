@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def dashboard
     authorize User
     @jobs = current_user.jobs
-    @candidates = current_user.candidates
+    @candidates = current_user.candidates.sort_by(&:days_since_applied)
   end
 
   def show
