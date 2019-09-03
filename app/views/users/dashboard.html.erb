@@ -6,18 +6,17 @@
 <div class="dashboard-container">
   <div class="top-container">
     <p><strong>New applications</strong></p>
-    <%= render 'candidates/index', jobs: @candidates %>
+    <%= render 'candidates/index', candidate: @candidates %>
   </div>
   <hr>
   <div class="bottom-container">
     <div class="bottom-left-container">
       <p><strong>Inbound applications</strong></p>
+      <%= area_chart charts_new_candidates_path, colors: ["#109CF1", "#666"] %>
     </div>
-    <div>
-      <p><strong>Open job positions (<%= @jobs.count %>)</strong></p>
       <div class="bottom-right-container">
+      <p><strong>Open job positions (<%= @jobs.count %>)</strong></p>
         <%= render 'jobs/index', jobs: @jobs %>
-      </div>
     </div>
   </div>
 </div>

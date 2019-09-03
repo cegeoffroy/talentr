@@ -8,4 +8,12 @@ class UserPolicy < ApplicationPolicy
   def dashboard?
     true
   end
+
+  def show?
+    record == user
+  end
+
+  def update?
+    show?
+  end
 end

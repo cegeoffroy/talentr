@@ -4,6 +4,10 @@ class CandidatesController < ApplicationController
 
   def index
     @candidates = policy_scope(Candidate).order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
