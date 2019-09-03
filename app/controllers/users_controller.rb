@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   def dashboard
     authorize User
     @jobs = current_user.jobs
-    @candidates = current_user.candidates
+    @applications = current_user.job_applications.where(status: 'pending').sort_by(&:date).reverse
+    @count = @applications.count
   end
 
   def show

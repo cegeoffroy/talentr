@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :jobs, only: [:index, :new, :create, :show] do
     resources :job_applications, only: [:new, :create]
   end
+
+  resources :job_applications, only: :update
+
   resources :candidates, only: [:new, :index, :show]
   namespace :charts do
     get 'new_candidates'
