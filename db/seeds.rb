@@ -15,8 +15,10 @@ URLS = %w(http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439799/uy2orz3gm
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441398/wmnu8a4edguf1ehsyq6s.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441462/c2rc9f3iu0muiwdglxq0.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441516/sjsnnl9ij7dqff74sedd.pdf)
+FILENAMES = %w(./ahmad.txt ./alwali.txt ./ben.txt ./dima.txt ./evia.txt ./shivam.txt ./wesley.txt
+               ./rich-cv.txt )
 
-def get_text(url)
+def get_text_from_url(url)
   ConvertApi.config.api_secret = ENV['CONVERT_API_SECRET']
   result = ConvertApi.convert('txt', {
                                 File: url,
@@ -27,6 +29,10 @@ def get_text(url)
                               from_format: 'pdf')
   text = open(result.file.url).read
   text.force_encoding('UTF-8')
+end
+
+def get_text_from_file(filename)
+  File.read(filename)
 end
 
 JobApplication.destroy_all
@@ -94,26 +100,17 @@ Job.find_each do |job|
     JobKeyword.create(job: job, keyword: Keyword.order('RANDOM()').first)
   end
   puts '4 keywords per job created!'
-  sample = URLS
+  sample = FILENAMES
   puts 'creating 7 candidates per job ...'
   7.times do
-    # below returns what it deletes so there can never be duplicate applicants to the same job
-    # url = sample.delete_at(rand(sample.length))
-    url = sample.sample
-    text = get_text(url)
+    url = URLS.sample
+    # text = get_text_from_url(url)
+    filename = FILENAMES.sample
+    text = get_text_from_file(filename)
     candidate = Candidate.new(attachment: url,
                               user: job.user)
     ParserService.new.parse_linkedin_cv_from_text(candidate, text)
-    # c = Candidate.new(name: Faker::Name.name,
-    #                  email: Faker::Internet.free_email,
-    #                  linkedin_url: 'https://www.linkedin.com/in/dmytrotarasenko/')
-    #c.user = job.user
-    # c.save!
-    # Info.create(candidate: c, meta_key: "experience", meta_value: (0..10).to_a.sample)
-    # Info.create(candidate: c, meta_key: "education", meta_value: UNIVERSITIES.sample)
-    # Info.create(candidate: c, meta_key: "tagline", meta_value: Faker::GreekPhilosophers.quote)
-    # Info.create(candidate: c, meta_key: "language", meta_value: "English")
-    # Info.create(candidate: c, meta_key: "skill", meta_value: SKILLS.sample)
+
     application = JobApplication.create(job: job, candidate: candidate,
                                         date: Date.today.to_datetime - (1..20).to_a.sample.days,
                                         status: "pending")
