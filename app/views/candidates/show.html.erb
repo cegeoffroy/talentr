@@ -2,13 +2,30 @@
   <div class="key-data">
     <div class="left">
       <h2><%= @candidate.name %></h2>
+    </div>
+    <div class="right">
       <% if @candidate.attachment %>
         <%= link_to @candidate.attachment, target: "_blank" do %>
           <i class="fas fa-file-pdf"></i>
         <% end %>
       <% end %>
-    </div>
-    <div class="right">
+      <% if @candidate.websites.length > 0 %>
+        <% @candidate.websites.each do |website| %>
+          <% if website[:origin] == 'linkedin' %>
+            <a href="<%= website[:url] %>" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          <% elsif website[:origin] == 'github' %>
+            <a href="<%= website[:url] %>" target="_blank">
+              <i class="fab fa-github-square"></i>
+            </a>
+          <% else %>
+            <a href="<%= website[:url] %>" target="_blank">
+              <i class="fas fa-external-link-square-alt"></i>
+            </a>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <% if params[:job_id]%>
