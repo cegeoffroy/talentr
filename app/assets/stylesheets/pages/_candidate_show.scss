@@ -1,19 +1,38 @@
 .candidate-show-container {
+  i {
+    font-size: 35px;
+    color: #C2CFE0;
+    transition: 0.3s;
+    margin-left: 10px;
+  }
+
+  i:hover {
+    color: #109CF1;
+  }
+
   h2 {
     margin: 0;
+    margin-right: 20px;
   }
 
   .key-data {
     display: flex;
+    padding: 50px;
+    justify-content: space-between;
   }
 
   .left {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+  }
 
-    i {
-      font-size: 25px;
-    }
+  img {
+    transition: 0.3s;
+    margin-left: 10px;
+  }
+
+  img:hover {
+    color: #109CF1;
   }
 }

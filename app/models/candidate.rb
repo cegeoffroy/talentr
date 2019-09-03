@@ -8,6 +8,6 @@ class Candidate < ApplicationRecord
   end
 
   def websites
-    infos.where(meta_key: 'webistes')[0].meta_value[:meta_value]
+    infos.where(meta_key: 'websites')[0].meta_value[:websites]
   end
 end
