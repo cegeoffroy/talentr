@@ -1,7 +1,6 @@
 class ChartsController < ApplicationController
-
   def new_candidates
-    render json: Candidate.group_by_day(:created_at).count
+    render json: JobApplication.where(status: 'pending').group_by_day(:date).count
     authorize Candidate
   end
 end
