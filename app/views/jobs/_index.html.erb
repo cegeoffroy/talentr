@@ -1,11 +1,11 @@
 <div class="table-container">
-  <table class="table">
+  <table class="table" id="example">
     <tr class="tx-al-c op-mid">
       <th></th>
-      <th>PENDING</th>
-      <th>ACCEPTED</th>
-      <th>TOTAL</th>
-      <th>DUE</th>
+      <th class="tx-al-r">PENDING</th>
+      <th class="tx-al-r">ACCEPTED</th>
+      <th class="tx-al-r">TOTAL</th>
+      <th class="tx-al-r">DUE</th>
     </tr>
     <% @jobs.each do |job| %>
     <tr>
@@ -14,7 +14,16 @@
       <!-- Insert here job_application -->
       <td class="tx-al-c"><%= job.job_applications.where(status: 'accepted').count %></td>
       <td class="tx-al-c"><%= job.job_applications.count %></td>
-      <td class="tx-al-c"><%= job.due_date.strftime("%d %b") %></td>
+      <td class="tx-al-r">
+        <% if (job.due_date === (Date.today + 1.day)) %>
+        <i class="fas fa-xs fa-circle" style="color:#F7685B; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
+        <% elsif (job.due_date < (Date.today + 15.day)) %>
+        <i class="fas fa-xs fa-circle" style="color:#FFB946; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
+        <% else %>
+        <i class="fas fa-xs fa-circle" style="color:transparent;"></i>
+        <% end %>
+        <%= job.due_date.strftime("%d %b") %>
+      </td>
     </tr>
     <% end %>
   </table>

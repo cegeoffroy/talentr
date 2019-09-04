@@ -33,7 +33,7 @@
   border: none;
   border-radius: 4px;
   margin: 5px;
-  color: white;
+  color: white !important;
   font-family: Cabin;
   font-style: normal;
   font-size: 16px;
@@ -85,7 +85,7 @@
 
 
 .nbtn-secondary {
-  color: #109CF1;
+  color: #109CF1 !important;
   border: 1px solid #109CF1;
   background-color: white;
 }
