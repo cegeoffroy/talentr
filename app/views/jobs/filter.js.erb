@@ -1,5 +1,6 @@
 filterContainer = document.querySelector(".container-for-container")
 candidatesTable = document.querySelector("#candidates-table-body")
+candidatesCounter = document.querySelector("#candidates-count")
 
 
 <% form_partial = j render './jobs/partials/filter_container', fields: @fields, job: @job %>
@@ -20,5 +21,7 @@ candidatesTable.innerHTML = ''
   <% partial = j render "./jobs/partials/candidate_row", candidate: candidate %>
   candidatesTable.insertAdjacentHTML("beforeend", "<%= partial %>")
 <% end %>
+
+candidatesCounter.innerHTML = "<%= @filtered_results.count %>"
 
 
