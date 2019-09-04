@@ -60,7 +60,11 @@ class JobsController < ApplicationController
 
   def remove_filter
     @job = Job.find(params[:job_id])
-    binding.pry
+    @value = "#{params[:variable]}---#{params[:comparator]}---#{params[:value]}"
+    authorize @job
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

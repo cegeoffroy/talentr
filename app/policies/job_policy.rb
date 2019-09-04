@@ -15,4 +15,8 @@ class JobPolicy < ApplicationPolicy
   def filter?
     true
   end
+
+  def remove_filter?
+    filter?
+  end
 end
