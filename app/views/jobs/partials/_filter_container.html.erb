@@ -5,7 +5,7 @@
     <%= f.input :value, label: false, placeholder: "data science" %>
     <%= f.simple_fields_for :hidden do |a| %>
       <% fields.each_with_index do |field, index| %>
-        <%= a.input :index, as: :hidden, input_html: {value: field} %>
+        <%= a.input index, as: :hidden, input_html: {value: field, style: "width: 0;"} %>
       <% end %>
     <% end %>
     <%= f.button :submit, "Add", class: "nbtn-primary filter-submit" %>
