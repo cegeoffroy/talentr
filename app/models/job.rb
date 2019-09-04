@@ -30,13 +30,42 @@ class Job < ApplicationRecord
           job_apps = JobApplication.where(candidate_id: c.ids).where("suitability = ?", value)
         end
       when "Experience Years"
-
-      when "Same Role Experience Years"
-
+        infos = Info.where(candidate_id: candidates.ids, meta_key: 'experience')
+        if comparator == ">"
+          infos = infos.to_a.delete_if { |info| info.experience_duration < value }
+        elsif comparator == "<"
+          infos = infos.to_a.delete_if { |info| info.experience_duration > value }
+        elsif comparator == "="
+          infos = infos.to_a.delete_if { |info| info.experience_duration != value }
+        end
+      when "Similar Role Experience Years"
+        infos = Info.where(candidate_id: candidates.ids, meta_key: 'experience')
+        if comparator == ">"
+          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) < value }
+        elsif comparator == "<"
+          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) > value }
+        elsif comparator == "="
+          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) != value }
+        end
       when "Education Years"
-
+        infos = Info.where(candidate_id: candidates.ids, meta_key: 'education')
+        if comparator == ">"
+          infos = infos.to_a.delete_if { |info| info.education_duration < value }
+        elsif comparator == "<"
+          infos = infos.to_a.delete_if { |info| info.education_duration > value }
+        elsif comparator == "="
+          infos = infos.to_a.delete_if { |info| info.education_duration != value }
+        end
       when "Skills"
-
+        if comparator == 'contains'
+          infos = Info.where(candidate_id: candidates.ids, meta_key: 'skills')
+          infos = infos.to_a.delete_if { |info| info.word_in_meat_value_array? > value }
+        end
+      when "Certifications"
+        if comparator == 'contains'
+          infos = Info.where(candidate_id: candidates.ids, meta_key: 'certificates')
+          infos = infos.to_a.delete_if { |info| info.word_in_meat_value_array? > value }
+        end
       else
 
       end
