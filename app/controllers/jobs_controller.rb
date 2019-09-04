@@ -44,8 +44,15 @@ class JobsController < ApplicationController
       end
     end
     results = Job.search(@job, @fields)
-    raise
+    first = results[0]
+    others = results[1..-1]
+    @filtered_results = first.select do |n|
+      others.all? do |o|
+        o.include?(n)
+      end
+    end
     authorize @job
+    @filtered_results.map! { |id| Candidate.find(id) }
     respond_to do |format|
       format.js
     end

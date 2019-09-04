@@ -27,6 +27,7 @@ class Info < ApplicationRecord
     experiences.each do |exp|
       next unless exp[:start_date] && exp[:end_date]
       next unless relevant_role?(exp, job.title)
+
       start_date = exp[:start_date]
       exp[:end_date] == 'Present' ? end_date = DateTime.now : end_date = exp[:end_date]
       duration += ((end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month)) / 12

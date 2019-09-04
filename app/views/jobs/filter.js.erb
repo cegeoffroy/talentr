@@ -1,4 +1,5 @@
 filterContainer = document.querySelector(".container-for-container")
+candidatesTable = document.querySelector("#candidates-table-body")
 
 
 <% form_partial = j render './jobs/partials/filter_container', fields: @fields, job: @job %>
@@ -14,6 +15,10 @@ appliedFilters = document.querySelector(".applied-filters")
   appliedFilters.insertAdjacentHTML("beforeend", "<%= partial %>")
 <% end %>
 
-
+candidatesTable.innerHTML = ''
+<% @filtered_results.each do |candidate| %>
+  <% partial = j render "./jobs/partials/candidate_row", candidate: candidate %>
+  candidatesTable.insertAdjacentHTML("beforeend", "<%= partial %>")
+<% end %>
 
 
