@@ -3,6 +3,7 @@ import { initFlatpickr } from '../plugins/init_flatpicker';
 
 initFlatpickr();
 
+
 $(document).ready(function() {
       $('#example tr').click(function(e) {
 

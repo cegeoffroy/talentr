@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'dashboard', to: 'users#dashboard'
 
+
   resources :jobs, only: [:index, :new, :create, :show] do
+    get 'filter', to: 'jobs#filter'
     resources :job_applications, only: [:new, :create]
   end
 

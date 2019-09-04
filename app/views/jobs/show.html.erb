@@ -4,6 +4,9 @@
 </div>
 
 <p>Due-date: <%= @job.due_date.strftime("%d %b '%y") %></p>
+<div class="container-for-container">
+<%= render './jobs/partials/filter_container', job: @job, fields: @fields %>
+</div>
 <div style="height: 350px; overflow-y: auto">
   <% if @job.candidates.any? %>
     <h2>List of candidates (<%= @job.candidates.count %>)</h2>
@@ -15,7 +18,7 @@
         <th>ACTIONS</th>
       </tr>
       <% @job.candidates.each do |candidate| %>
-      <tr>
+      <tr data-application-id="<%= candidate.id %>">
         <td><%= candidate.name%></td>
         <td><%= candidate.email %></td>
         <td><%= candidate.days_since_applied %> days ago</td>

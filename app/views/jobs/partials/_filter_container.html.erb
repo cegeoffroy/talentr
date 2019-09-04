@@ -1,0 +1,16 @@
+<div class="filter-container">
+  <%= simple_form_for :filter, html: {class: 'form-inline filter-select'}, url: job_filter_path(job), method: :get do |f| %>
+    <%= f.input :variable, collection: Candidate::FILTERS, label: false, placeholder: "Education" %>
+    <%= f.input :comparator, collection: Candidate::COMPARATORS, label: false, placeholder: "contains" %>
+    <%= f.input :value, label: false, placeholder: "data science" %>
+    <%= f.simple_fields_for :hidden do |a| %>
+      <% fields.each_with_index do |field, index| %>
+        <%= a.input index, as: :hidden, input_html: {value: field, style: "width: 0;"} %>
+      <% end %>
+    <% end %>
+    <%= f.button :submit, "Add", class: "nbtn-primary filter-submit" %>
+  <% end %>
+  <div class="applied-filters">
+
+  </div>
+</div>
