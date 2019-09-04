@@ -84,7 +84,7 @@ puts "Created #{User.count} users!"
 
 puts 'creating 2 jobs under each user ...'
 User.find_each do |user|
-  2.times do
+  3.times do
     job = Job.new(title: JOB_TITLES.sample,
                      due_date: Date.today.to_datetime + (1..100).to_a.sample.days)
     job.user = user

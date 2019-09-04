@@ -1,9 +1,10 @@
-<div class="dashboard-title">
-  <h2>List of job openings</h2>
+<div class="title">
+  <h2>Job Openings</h2>
   <%= link_to "New Opening", new_job_path, class: "nbtn nbtn-primary" %>
 </div>
-<hr>
-<div class="top-container">
-  <p><strong>Open job positions (<%= @jobs.count %>)</strong></p>
-  <%= render 'index', jobs: @jobs %>
+<br>
+<div class="dashboard-container">
+  <div class="top-container">
+    <%= render 'index', jobs: @jobs %>
+  </div>
 </div>

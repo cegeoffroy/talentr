@@ -1,12 +1,11 @@
 <div class="dashboard-title">
-  <h3>Candidates database</h3>
+  <h2>Candidates Database</h2>
 </div>
-<hr>
-<div class="table-container">
+<div class="table-container" style="height: auto;">
   <% if @candidates.any? %>
-    <table class="table">
+    <table class="table" id="example">
       <tr class="op-mid">
-        <th class="txt-al-l">CANDIDATES</th>
+        <th class="txt-al-l"></th>
         <th>EMAIL</th>
         <th>RECEIVED</th>
         <th class="tx-al-c">DETAILS</th>
@@ -15,7 +14,7 @@
       <tr>
         <td><strong><%= candidate.name %></strong></td>
         <td><%= candidate.email %></td>
-        <td><%= candidate.days_since_applied %> days ago</td>
+        <td><%= candidate.days_since_applied %> day<% if candidate.days_since_applied > 1 %>s<% end %> ago</td>
         <td class="tx-al-c"><%= link_to candidate_path(candidate) do%>
           <i class="far fa-eye"></i>
           <% end %>

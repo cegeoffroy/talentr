@@ -1,9 +1,6 @@
-<div class="candidate-show-container">
-  <div class="key-data">
-    <div class="left">
-      <h2><%= @candidate.name %></h2>
-    </div>
-    <div class="right">
+<div class="title">
+  <h2><%= @candidate.name %></h2>
+  <h3>
       <% if @candidate.attachment %>
         <%= link_to @candidate.attachment, target: "_blank" do %>
           <i class="fas fa-file-pdf"></i>
@@ -12,11 +9,11 @@
       <% if @candidate.websites.length > 0 %>
         <% @candidate.websites.each do |website| %>
           <% if website[:origin] == 'linkedin' %>
-            <a href="<%= website[:url] %>" target="_blank">
+            <a href="https://<%= website[:url] %>" target="_blank">
               <i class="fab fa-linkedin"></i>
             </a>
           <% elsif website[:origin] == 'github' %>
-            <a href="<%= website[:url] %>" target="_blank">
+            <a href="https://<%= website[:url] %>" target="_blank">
               <i class="fab fa-github-square"></i>
             </a>
           <% else %>
@@ -26,11 +23,70 @@
           <% end %>
         <% end %>
       <% end %>
-    </div>
-  </div>
-  <% if params[:job_id]%>
-    <%= link_to " « Go Back to Job Position", job_path(Job.find(params[:job_id])), class: 'nbtn nbtn-simple' %>
-  <% else %>
-    <%= link_to " « Go to Candidates", candidates_path, class: 'nbtn nbtn-simple' %>
+    </h3>
+</div>
+
+<p style="color: #90A0B7; margin-bottom: 15px;"><%= @candidate.email %></p>
+
+<h4 style="color: #90A0B7; margin-bottom: 15px;"><%= @candidate.phone_number %></h4>
+
+<div class="main-data" style="overflow-y: auto; color: #192A3E;">
+  <p style="background-color: #EEF2F4; padding: 5px; color: #192A3E;"><%= @candidate.infos.where(meta_key: 'tagline')[0].meta_value %></p>
+
+  <% if @candidate.skills.any? %>
+    <h4>Skills</h4>
+    <% @candidate.skills.each do |skill| %>
+      <%= skill %>
+    <% end %>
   <% end %>
+
+  <% if @candidate.languages %>
+    <h4>Languages</h4>
+    <% @candidate.languages.each do |language| %>
+      <p><strong><%= language[:language] %>:</strong> <%= language[:level] %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <% if @candidate.education.any? %>
+    <h4>Education</h4>
+    <% @candidate.education.each do |education| %>
+      <p>
+        <strong><%= education[:subject] %></strong>
+        <%= education[:institute] %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <% if @candidate.certificates.any? %>
+    <h4>Certificates</h4>
+    <% @candidate.certificates.each do |certificate| %>
+      <%= certificate %>
+    <% end %>
+  <% end %>
+
+  <% if @candidate.experiences.any? %>
+    <h4>Experience</h4>
+    <% @candidate.experiences.each do |experience| %>
+      <p>
+        <strong><%= experience[:position] %>, <%= experience[:company] %></strong>
+        <span style="color: #707683;">(<%= experience[:start_date].strftime("%d %b '%y") %>
+        <% unless experience[:end_date].class == String %>
+           - <%= experience[:end_date].strftime("%d %b '%y")%><% end %>)</span>
+      </p>
+    <% end %>
+  <% end %>
+
+
+
+
+  <div class="candidate-show-container">
+    <div class="key-data">
+    </div>
+    <% if params[:job_id]%>
+      <%= link_to " « Go Back to Job Position", job_path(Job.find(params[:job_id])), class: 'nbtn nbtn-simple' %>
+    <% else %>
+      <%= link_to " « Go to Candidates", candidates_path, class: 'nbtn nbtn-simple' %>
+    <% end %>
+  </div>
 </div>
