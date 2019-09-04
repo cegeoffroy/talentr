@@ -85,7 +85,7 @@ class Job < ApplicationRecord
         arr = []
         if comparator == 'contains'
           infos = Info.where(candidate_id: candidates.ids, meta_key: 'certificates')
-          infos = infos.to_a.delete_if { |info| info.word_in_meat_value_array? > value }
+          infos = infos.to_a.delete_if { |info| info.word_in_meta_value_array?(value) }
           infos.each { |info| arr << info.candidate.id }
         end
         all_results << arr

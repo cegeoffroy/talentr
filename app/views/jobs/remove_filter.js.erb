@@ -4,7 +4,6 @@ inputs.forEach(input => {
 if (input.value == "<%= raw @value %>") {
   input.remove();
 }
-
 })
 
 Rails.fire(form, 'submit')
