@@ -13,7 +13,7 @@
       </tr>
       <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= candidate.name%></td>
+        <td><strong><%= candidate.name %></strong></td>
         <td><%= candidate.email %></td>
         <td><%= candidate.days_since_applied %> days ago</td>
         <td class="tx-al-c"><%= link_to candidate_path(candidate) do%>
@@ -27,4 +27,4 @@
     <p>No candidate yet in your database</p>
   <% end %>
 </div>
-<%= link_to "« Back to Dashboard", dashboard_path, class: 'nbtn nbtn-simple' %>
+<%= link_to " « Back to Dashboard", dashboard_path, class: 'nbtn nbtn-simple' %>
