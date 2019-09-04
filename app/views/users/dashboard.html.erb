@@ -5,7 +5,7 @@
 <br>
 <div class="dashboard-container">
   <div class="top-container">
-    <h4>Outstanding applications (<%= @count %>)</h4>
+    <h4>Outstanding applications (<span id="outstanding-count"><%= @count %></span>)</h4>
     <%= render 'shared/applications_dash', candidate: @applications %>
   </div>
   <br>
@@ -13,7 +13,7 @@
     <div class="bottom-left-container">
       <h4>Inbound applications</h4>
       <br>
-      <%= area_chart charts_new_candidates_path, colors: ["#109CF1", "#666"] %>
+      <%= area_chart charts_new_candidates_path, colors: ["#109CF1", "#666"], max: 10 %>
     </div>
       <div class="bottom-right-container">
       <h4>Open job positions (<%= @jobs.count %>)</h4>

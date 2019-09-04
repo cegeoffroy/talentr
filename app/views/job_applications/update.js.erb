@@ -1,5 +1,10 @@
 if (<%= !@job_application.id.nil? %>) {
   document.querySelector("[data-application-id='<%= @job_application.id %>']").remove();
+  counterElement = document.querySelector("#outstanding-count")
+  counter = counterElement.innerText
+  intCounter = parseInt(counter, 10)
+  intCounter -= 1
+  counterElement.innerText = intCounter
 }
 
 
