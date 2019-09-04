@@ -1,5 +1,5 @@
-<h2>New Job opening</h2>
-<div class="container-form">
+<h2>New Job Opening</h2>
+<div class="container-form" style="margin-top: 30px;">
   <%= simple_form_for @job do |f| %>
     <% if @job.errors.any? %>
       <div class="errors-container">
@@ -20,8 +20,7 @@
       <%= keywords.input :keywords, label: 'KEYWORDS', hint: 'Add as many keywords as you like, separated with commas' %>
     <% end %>
     <%= f.input :due_date, input_html: { class: "date-field" }, label: 'DUE IN', as: :string %>
-    <%= f.association :user, label: 'JOB OWNER', :include_blank => false, :label_method => lambda { |user| "#{user.photo}  #{user.first_name} #{user.last_name} "} %>
-  <div class="question">
+  <div class="question" style="margin-bottom: 25px;">
     <p>Would you like to define baseline criteria now? This will be used to auto-label candidates to help you manage your workload. Don’t worry, you will still need to finalise all decisions.
     </p>
     <i class="fas fa-toggle-on"></i>
