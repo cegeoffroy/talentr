@@ -1,4 +1,6 @@
 filterContainer = document.querySelector(".container-for-container")
+candidatesTable = document.querySelector("#candidates-table-body")
+candidatesCounter = document.querySelector("#candidates-count")
 
 
 <% form_partial = j render './jobs/partials/filter_container', fields: @fields, job: @job %>
@@ -10,10 +12,19 @@ appliedFilters = document.querySelector(".applied-filters")
 <% @fields.each do |field| %>
   <% split_fields = field.split("---") %>
   <% field_hash = { variable: split_fields[0], comparator: split_fields[1], value: split_fields[2] } %>
-  <% partial = j render "./jobs/partials/applied_filter", field: field_hash %>
-  appliedFilters.insertAdjacentHTML("beforeend", "<%= partial %>")
+  console.log("<%= split_fields %>")
+  <% if split_fields != [] %>
+    <% partial = j render "./jobs/partials/applied_filter", field: field_hash, job: @job %>
+    appliedFilters.insertAdjacentHTML("beforeend", "<%= partial %>")
+  <% end %>
 <% end %>
 
+candidatesTable.innerHTML = ''
+<% @filtered_results.each do |candidate| %>
+  <% partial = j render "./jobs/partials/candidate_row", candidate: candidate %>
+  candidatesTable.insertAdjacentHTML("beforeend", "<%= partial %>")
+<% end %>
 
+candidatesCounter.innerHTML = "<%= @filtered_results.count %>"
 
 

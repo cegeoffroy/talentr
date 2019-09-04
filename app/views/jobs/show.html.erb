@@ -9,7 +9,7 @@
 </div>
 <div style="height: 350px; overflow-y: auto">
   <% if @job.candidates.any? %>
-    <h2>List of candidates (<%= @job.candidates.count %>)</h2>
+    <h2>List of candidates <span id="candidates-count">(<%= @job.candidates.count %>)</span></h2>
     <table style="width:100%">
       <tr>
         <th>APPLICATIONS</th>
@@ -17,14 +17,11 @@
         <th>RECEIVED</th>
         <th>ACTIONS</th>
       </tr>
-      <% @job.candidates.each do |candidate| %>
-      <tr data-application-id="<%= candidate.id %>">
-        <td><%= candidate.name%></td>
-        <td><%= candidate.email %></td>
-        <td><%= candidate.days_since_applied %> days ago</td>
-        <td><%= link_to "show", candidate_path(candidate, job_id: @job.id) %></td>
-      </tr>
-      <% end %>
+      <tbody id="candidates-table-body">
+        <% @job.candidates.each do |candidate| %>
+          <%= render './jobs/partials/candidate_row', candidate: candidate %>
+        <% end %>
+      </tbody>
     </table>
   <% else %>
     <p>No candidate yet for this job opening</p>

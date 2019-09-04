@@ -34,7 +34,16 @@ class JobsController < ApplicationController
   def filter
     @job = Job.find(params[:job_id])
     @fields = []
-    if params[:filter]
+    results = nil
+    p params
+    # execute if statemment if params variables are not-empty
+    if params[:filter][:hidden] != nil
+      hidden = params[:filter][:hidden].values.to_a[0] != "------"
+    else
+      hidden = false
+    end
+
+    if !params[:filter][:variable].blank? || hidden
       s = "#{params[:filter][:variable]}---#{params[:filter][:comparator]}---#{params[:filter][:value]}"
       @fields << s
       if params[:filter][:hidden]
@@ -42,8 +51,31 @@ class JobsController < ApplicationController
           @fields << v
         end
       end
+      results = Job.search(@job, @fields)
     end
-    Job.search(@job, @fields)
+    if !results.nil? && results.any?
+      first = results[0]
+      others = results[1..-1]
+      @filtered_results = first.select do |n|
+        others.all? do |o|
+          o.include?(n)
+        end
+      end
+      @filtered_results.map! { |id| Candidate.find(id) }
+    elsif results.nil?
+      @filtered_results = @job.candidates
+    else
+      @filtered_results = []
+    end
+    authorize @job
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def remove_filter
+    @job = Job.find(params[:job_id])
+    @value = "#{params[:variable]}---#{params[:comparator]}---#{params[:value]}"
     authorize @job
     respond_to do |format|
       format.js

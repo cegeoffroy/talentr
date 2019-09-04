@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :jobs, only: [:index, :new, :create, :show] do
     get 'filter', to: 'jobs#filter'
+    get 'remove_filter', to: 'jobs#remove_filter'
     resources :job_applications, only: [:new, :create]
   end
 
