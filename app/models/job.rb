@@ -22,7 +22,13 @@ class Job < ApplicationRecord
           infos = Info.where(candidate_id: candidates.ids, meta_key: 'full_text').search_by_meta_value(value)
         end
       when "Suitability Score"
-
+        if comparator == ">"
+          job_apps = JobApplication.where(candidate_id: c.ids).where("suitability > ?", value)
+        elsif comparator == "<"
+          job_apps = JobApplication.where(candidate_id: c.ids).where("suitability < ?", value)
+        elsif comparator == "="
+          job_apps = JobApplication.where(candidate_id: c.ids).where("suitability = ?", value)
+        end
       when "Experience Years"
 
       when "Same Role Experience Years"
