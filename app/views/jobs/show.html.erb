@@ -4,7 +4,9 @@
 </div>
 
 <p>Due-date: <%= @job.due_date.strftime("%d %b '%y") %></p>
-<%= render './jobs/partials/filter_container', job: @job %>
+<div class="container-for-container">
+<%= render './jobs/partials/filter_container', job: @job, fields: @fields %>
+</div>
 <div style="height: 350px; overflow-y: auto">
   <% if @job.candidates.any? %>
     <h2>List of candidates (<%= @job.candidates.count %>)</h2>

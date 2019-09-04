@@ -27,11 +27,22 @@ class JobsController < ApplicationController
   end
 
   def show
+    @fields = []
     authorize @job
   end
 
   def filter
     @job = Job.find(params[:job_id])
+    @fields = []
+    if params[:filter]
+      s = "#{params[:filter][:variable]}---#{params[:filter][:comparator]}---#{params[:filter][:value]}"
+      @fields << s
+      if params[:filter][:hidden]
+        params[:filter][:hidden].each do |k, v|
+          @fields << v
+        end
+      end
+    end
     authorize @job
     respond_to do |format|
       format.js

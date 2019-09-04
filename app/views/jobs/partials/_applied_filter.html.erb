@@ -1,5 +1,5 @@
-<div class="filter" data-filter-id="1">
-  <p><strong>Skills</strong> contains <strong>Ruby</strong></p>
+<div class="filter">
+  <p><strong id="variable"><%= field[:variable] %></strong> <span id="comparator"><%= field[:comparator] %></span> <strong id="value"><%= field[:value] %></strong></p>
 <%= link_to root_path, method: :patch, remote: true do %>
   <i class="fas fa-times"></i>
 <% end %>
