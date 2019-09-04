@@ -1,11 +1,11 @@
 <div class="table-container">
   <table class="table" id="example">
     <tr class="tx-al-c op-mid">
-      <th></th>
-      <th class="tx-al-r">PENDING</th>
-      <th class="tx-al-r">ACCEPTED</th>
-      <th class="tx-al-r">TOTAL</th>
-      <th class="tx-al-r">DUE</th>
+      <th width="10"></th>
+      <th class="tx-al-c">PEND</th>
+      <th class="tx-al-c">ACCEPTED</th>
+      <th class="tx-al-c">TOTAL</th>
+      <th width="100" class="tx-al-r">DUE</th>
     </tr>
     <% @jobs.each do |job| %>
     <tr>
@@ -15,9 +15,9 @@
       <td class="tx-al-c"><%= job.job_applications.where(status: 'accepted').count %></td>
       <td class="tx-al-c"><%= job.job_applications.count %></td>
       <td class="tx-al-r">
-        <% if (job.due_date === (Date.today + 1.day)) %>
+        <% if (job.due_date < (Date.today + 1.day)) %>
         <i class="fas fa-xs fa-circle" style="color:#F7685B; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
-        <% elsif (job.due_date < (Date.today + 15.day)) %>
+        <% elsif (job.due_date < (Date.today + 14.day)) %>
         <i class="fas fa-xs fa-circle" style="color:#FFB946; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
         <% else %>
         <i class="fas fa-xs fa-circle" style="color:transparent;"></i>

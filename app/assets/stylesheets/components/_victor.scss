@@ -14,6 +14,21 @@ a:hover {
   color: #0a6eab;
 }
 
+////// CANDIDATES VISUAL //////
+.main-data h4 {
+  font-family: Cabin;
+  font-style: bold;
+  font-weight: lighter;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: #818E9B;
+  opacity: 0.9;
+  text-transform: uppercase;
+  margin: 25px 0px 10px 0px;
+}
+
+
 //////// FIX HEADER //////
 h2 {
   margin: 0;
@@ -88,7 +103,7 @@ table a {
 }
 
 th {
-  color: #90A0B7;
+  color: #818E9B;
   font-size: 13px !important;
 }
 
