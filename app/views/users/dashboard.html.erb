@@ -1,21 +1,22 @@
 <div class="dashboard-title">
-  <h3>Dashboard</h3>
+  <h2>Dashboard</h2>
   <%= link_to "New Opening", new_job_path, class: "nbtn nbtn-primary" %>
 </div>
-<hr>
+<br>
 <div class="dashboard-container">
   <div class="top-container">
-    <p><strong>Outstanding applications (<%= @count %>)</strong></p>
+    <h4>Outstanding applications (<%= @count %>)</h4>
     <%= render 'shared/applications_dash', candidate: @applications %>
   </div>
-  <hr>
+  <br>
   <div class="bottom-container">
     <div class="bottom-left-container">
-      <p><strong>Inbound applications</strong></p>
+      <h4>Inbound applications</h4>
+      <br>
       <%= area_chart charts_new_candidates_path, colors: ["#109CF1", "#666"] %>
     </div>
       <div class="bottom-right-container">
-      <p><strong>Open job positions (<%= @jobs.count %>)</strong></p>
+      <h4>Open job positions (<%= @jobs.count %>)</h4>
         <%= render 'jobs/index', jobs: @jobs %>
     </div>
   </div>
