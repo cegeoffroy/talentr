@@ -1,6 +1,6 @@
 <div class="filter">
   <p><strong id="variable"><%= field[:variable] %></strong> <span id="comparator"><%= field[:comparator] %></span> <strong id="value"><%= field[:value] %></strong></p>
-<%= link_to root_path, method: :patch, remote: true do %>
+<%= link_to job_remove_filter_path(job, field), method: :get, remote: true do %>
   <i class="fas fa-times"></i>
 <% end %>
 </div>

@@ -58,6 +58,11 @@ class JobsController < ApplicationController
     end
   end
 
+  def remove_filter
+    @job = Job.find(params[:job_id])
+    binding.pry
+  end
+
   private
 
   def set_job
