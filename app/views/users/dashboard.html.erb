@@ -5,7 +5,7 @@
 <br>
 <div class="dashboard-container">
   <div class="top-container">
-    <h4>Outstanding applications (<%= @count %>)</h4>
+    <h4>Outstanding applications (<span id="outstanding-count"><%= @count %></span>)</h4>
     <%= render 'shared/applications_dash', candidate: @applications %>
   </div>
   <br>
