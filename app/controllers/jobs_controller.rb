@@ -33,6 +33,7 @@ class JobsController < ApplicationController
 
   def filter
     @job = Job.find(params[:job_id])
+    p params
     @fields = []
     if params[:filter]
       s = "#{params[:filter][:variable]}---#{params[:filter][:comparator]}---#{params[:filter][:value]}"

@@ -6,5 +6,6 @@ if (input.value == "<%= raw @value %>") {
 }
 
 })
-form.submit();
+
+Rails.fire(form, 'submit')
 
