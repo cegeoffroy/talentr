@@ -43,7 +43,8 @@ class JobsController < ApplicationController
         end
       end
     end
-    Job.search(@job, @fields)
+    results = Job.search(@job, @fields)
+    raise
     authorize @job
     respond_to do |format|
       format.js

@@ -18,57 +18,79 @@ class Job < ApplicationRecord
       value = split_field[2]
       case variable
       when "Full Text"
+        arr = []
         if comparator == 'contains'
           infos = Info.where(candidate_id: candidates.ids, meta_key: 'full_text').search_by_meta_value(value)
+          infos.each { |info| arr << info.candidate.id }
+          all_results << arr
         end
-      when "Suitability Score"
+      when "Suitability score"
+        job_apps = nil
+        arr = []
         if comparator == ">"
-          job_apps = JobApplication.where(candidate_id: c.ids).where("suitability > ?", value)
+          job_apps = JobApplication.where(candidate_id: candidates.ids).where("suitability > ?", value)
+          p "hello #{job_apps}"
         elsif comparator == "<"
-          job_apps = JobApplication.where(candidate_id: c.ids).where("suitability < ?", value)
-        elsif comparator == "="
-          job_apps = JobApplication.where(candidate_id: c.ids).where("suitability = ?", value)
+          job_apps = JobApplication.where(candidate_id: candidates.ids).where("suitability < ?", value)
+        elsif comparator == "exactly equals"
+          job_apps = JobApplication.where(candidate_id: candidates.ids).where("suitability = ?", value)
         end
-      when "Experience Years"
+        job_apps.each { |job_app| arr << job_app.candidate.id } if job_apps
+        all_results << arr
+      when "Experience years"
         infos = Info.where(candidate_id: candidates.ids, meta_key: 'experience')
+        arr = []
         if comparator == ">"
-          infos = infos.to_a.delete_if { |info| info.experience_duration < value }
+          infos = infos.to_a.delete_if { |info| info.experience_duration < value.to_i }
         elsif comparator == "<"
-          infos = infos.to_a.delete_if { |info| info.experience_duration > value }
-        elsif comparator == "="
-          infos = infos.to_a.delete_if { |info| info.experience_duration != value }
+          infos = infos.to_a.delete_if { |info| info.experience_duration > value.to_i }
+        elsif comparator == "exactly equals"
+          infos = infos.to_a.delete_if { |info| info.experience_duration != value.to_i }
         end
-      when "Similar Role Experience Years"
+        infos.each { |info| arr << info.candidate.id }
+        all_results << arr
+      when "Similar Role Experience years"
         infos = Info.where(candidate_id: candidates.ids, meta_key: 'experience')
+        arr = []
         if comparator == ">"
-          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) < value }
+          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) < value.to_i }
         elsif comparator == "<"
-          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) > value }
-        elsif comparator == "="
-          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) != value }
+          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) > value.to_i }
+        elsif comparator == "exactly equals"
+          infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) != value.to_i }
         end
-      when "Education Years"
+        infos.each { |info| arr << info.candidate.id }
+        all_results << arr
+      when "Education years"
         infos = Info.where(candidate_id: candidates.ids, meta_key: 'education')
+        arr = []
         if comparator == ">"
-          infos = infos.to_a.delete_if { |info| info.education_duration < value }
+          infos = infos.to_a.delete_if { |info| info.education_duration < value.to_i }
         elsif comparator == "<"
-          infos = infos.to_a.delete_if { |info| info.education_duration > value }
-        elsif comparator == "="
-          infos = infos.to_a.delete_if { |info| info.education_duration != value }
+          infos = infos.to_a.delete_if { |info| info.education_duration > value.to_i }
+        elsif comparator == "exactly equals"
+          infos = infos.to_a.delete_if { |info| info.education_duration != value.to_i }
         end
+        infos.each { |info| arr << info.candidate.id }
+        all_results << arr
       when "Skills"
+        arr = []
         if comparator == 'contains'
           infos = Info.where(candidate_id: candidates.ids, meta_key: 'skills')
-          infos = infos.to_a.delete_if { |info| info.word_in_meat_value_array? > value }
+          infos = infos.to_a.delete_if { |info| !info.word_in_meta_value_array?(value) }
+          infos.each { |info| arr << info.candidate.id }
         end
+        all_results << arr
       when "Certifications"
+        arr = []
         if comparator == 'contains'
           infos = Info.where(candidate_id: candidates.ids, meta_key: 'certificates')
           infos = infos.to_a.delete_if { |info| info.word_in_meat_value_array? > value }
+          infos.each { |info| arr << info.candidate.id }
         end
-      else
-
+        all_results << arr
       end
     end
+    all_results
   end
 end

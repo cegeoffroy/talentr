@@ -34,7 +34,7 @@ class Info < ApplicationRecord
     duration
   end
 
-  def word_in_meat_value_array?(word)
+  def word_in_meta_value_array?(word)
     array = meta_value
     if array
       array.each do |item|
@@ -51,14 +51,14 @@ class Info < ApplicationRecord
     eds.each do |ed|
       next unless ed[:start_date] && ed[:end_date]
 
-      start_date = ed[:end_date]
+      start_date = ed[:start_date]
       end_date = ed[:end_date]
       duration += ((end_date.year * 12 + end_date.month) - (start_date.year * 12 + start_date.month)) / 12
     end
     duration
   end
 
-  def relevant_role?(experience, title)
+  def relevant_role?(exp, title)
     title.downcase.split(" ").each do |word|
       return true if exp[:position].downcase.include?(word) || exp[:description].downcase.include?(word)
     end
