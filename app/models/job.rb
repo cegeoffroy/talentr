@@ -19,7 +19,7 @@ class Job < ApplicationRecord
       case variable
       when "Full Text"
         if comparator == 'contains'
-
+          infos = Info.where(candidate_id: candidates.ids, meta_key: 'full_text').search_by_meta_value(value)
         end
       when "Suitability Score"
 
