@@ -64,7 +64,8 @@ class JobsController < ApplicationController
       results = Job.search(@job, @fields)
     elsif session[:fields].any?
       @fields = session[:fields]
-      results = Job.search(@job, @fields)
+      @fields.select! { |item| item.match?(/.+---.+---.+/) }
+      results = Job.search(@job, @fields) if @fields.any?
     end
     p session[:fields]
     p results
