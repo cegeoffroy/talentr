@@ -5,8 +5,10 @@
 <br>
 <div class="dashboard-container">
   <div class="top-container">
-    <h4>Outstanding applications (<span id="outstanding-count" class="outstanding-count"><%= @count %></span>)</h4>
-    <%= render 'shared/applications_dash', candidate: @applications %>
+    <h4>Top 5 Superstars you <span style="text-decoration: underline; text-decoration-color: #167FFB">should</span> hire 😎</h4>
+    <div class="dash-container">
+      <%= render 'shared/applications_dash', candidate: @applications %>
+    </div>
   </div>
   <br>
   <div class="bottom-container">
