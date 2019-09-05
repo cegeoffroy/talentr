@@ -63,7 +63,8 @@ class JobsController < ApplicationController
       end
       results = Job.search(@job, @fields)
     elsif session[:fields].any?
-      results = Job.search(@job, session[:fields])
+      @fields = session[:fields]
+      results = Job.search(@job, @fields)
     end
     p session[:fields]
     p results
