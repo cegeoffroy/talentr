@@ -137,8 +137,9 @@ tr:hover {
 }
 
 
-tr:first-child:hover {
+thead tr:first-child:hover {
   background-color: #fff;
+  cursor: initial;
 }
 
 td.strong {

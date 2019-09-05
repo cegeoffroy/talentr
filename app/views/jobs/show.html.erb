@@ -14,24 +14,28 @@
 <br>
 
 <div class="top-container">
-  <% if @job.candidates.any? %>
+  <% if @filtered_results.any? %>
     <h4>List of candidates <span id="candidates-count">(<%= @filtered_results.count %>)</span></h4>
     <div class="table-container">
-      <table class="table" id="candidates-table-body">
-        <tr class="op-mid">
-          <th></th>
-          <th class="tx-al-l">EMAIL</th>
-          <th class="tx-al-l">RECEIVED</th>
-          <th class="tx-al-l">ACTIONS</th>
-        </tr>
-        <% @filtered_results.each do |candidate| %>
-          <%= render './jobs/partials/candidate_row', candidate: candidate %>
-        <% end %>
+      <table class="table" id="example">
+        <thead>
+          <tr class="op-mid">
+            <th></th>
+            <th class="tx-al-l">EMAIL</th>
+            <th class="tx-al-l">RECEIVED</th>
+            <th class="tx-al-r">ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody id="candidates-table-body">
+          <% @filtered_results.each do |candidate| %>
+            <%= render './jobs/partials/candidate_row', candidate: candidate %>
+          <% end %>
+        </tbody>
       </table>
     </div>
     <% else %>
     <p>No candidate yet for this job opening</p>
   <% end %>
-</div>q
+</div>
 
 <%= link_to "« Go Back", dashboard_path, class: 'nbtn nbtn-simple' %>
