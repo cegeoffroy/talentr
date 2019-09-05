@@ -17,7 +17,9 @@
     </div>
       <div class="bottom-right-container">
       <h4>Open job positions (<%= @jobs.count %>)</h4>
+      <div class="ajax-container">
         <%= render 'jobs/index', jobs: @jobs %>
+      </div>
     </div>
   </div>
 </div>

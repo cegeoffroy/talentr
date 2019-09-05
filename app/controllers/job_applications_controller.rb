@@ -39,6 +39,7 @@ class JobApplicationsController < ApplicationController
 
   def update
     @job_application = JobApplication.find(params[:id])
+    @jobs = current_user.jobs
     authorize @job_application
     status = params[:q]
     if ['accept', 'reject'].include?(status)
