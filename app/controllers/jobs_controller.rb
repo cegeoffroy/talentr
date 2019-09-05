@@ -35,10 +35,11 @@ class JobsController < ApplicationController
     @job = Job.find(params[:job_id])
     @fields = []
     results = nil
-    p params
     # execute if statemment if params variables are not-empty
     if params[:filter][:hidden] != nil
-      hidden = params[:filter][:hidden].values.to_a[0] != "------"
+      array = params[:filter][:hidden].values.to_a
+      array.select! { |item| item.match?(/.+---.+---.+/) }
+      hidden = array.any?
     else
       hidden = false
     end
