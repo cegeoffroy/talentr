@@ -70,4 +70,13 @@ class Info < ApplicationRecord
     eds = meta_value[:education]
     eds.first[:institute]
   end
+
+  def last_workplace
+    eds = meta_value[:items]
+    if !eds.first[:company].blank?
+      eds.first[:company]
+    else
+      eds.first[:position]
+    end
+  end
 end

@@ -45,6 +45,11 @@ class Candidate < ApplicationRecord
     eds.last_education
   end
 
+  def last_workplace
+    exp = infos.where(meta_key: 'experience')[0]
+    exp.last_workplace
+  end
+
   FILTERS = ['Full Text', 'Suitability score', 'Experience years',
              'Similar Role Experience years', 'Education years', 'Skills', 'Certifications', 'Accept', 'Reject', 'Pending']
   COMPARATORS = ['contains', 'exactly equals', '>', '<']
