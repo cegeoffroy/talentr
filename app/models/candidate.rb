@@ -35,7 +35,7 @@ class Candidate < ApplicationRecord
     infos.where(meta_key: 'phone_number')[0].meta_value
   end
 
-  FILTERS = ['Full Text', 'Suitability score', 'Experience', 'Experience years',
-             'Similar Role Experience years', 'Education years', 'Skills', 'Certifications']
+  FILTERS = ['Full Text', 'Suitability score', 'Experience years',
+             'Similar Role Experience years', 'Education years', 'Skills', 'Certifications', 'Accept', 'Reject', 'Pending']
   COMPARATORS = ['contains', 'exactly equals', '>', '<']
 end

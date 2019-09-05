@@ -15,7 +15,7 @@
 
 <div class="top-container">
   <% if @filtered_results.any? %>
-    <h4>List of candidates <span id="candidates-count">(<%= @filtered_results.count %>)</span></h4>
+    <h4>List of candidates (<span id="candidates-count" class="outstanding-count"><%= @filtered_results.count %></span>)</h4>
     <div class="table-container">
       <table class="table" id="example">
         <thead>
