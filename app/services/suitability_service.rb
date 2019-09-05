@@ -14,6 +14,7 @@ class SuitabilityService
       w.downcase.strip
     end
     call_calculators
+    @score = 100 if @score.round > 100
     return @score.round
   end
 
