@@ -17,7 +17,7 @@
   <% if @job.candidates.any? %>
     <h4>List of candidates <span id="candidates-count">(<%= @filtered_results.count %>)</span></h4>
     <div class="table-container">
-      <table class="table" id="example">
+      <table class="table" id="candidates-table-body">
         <tr class="op-mid">
           <th></th>
           <th class="tx-al-l">EMAIL</th>
@@ -26,14 +26,6 @@
         </tr>
         <% @filtered_results.each do |candidate| %>
           <%= render './jobs/partials/candidate_row', candidate: candidate %>
-        <% end %>
-        <% @job.candidates.each do |candidate| %>
-          <tr data-application-id="<%= candidate.id %>">
-            <td class="tx-al-l strong"><%= candidate.name%></td>
-            <td class="tx-al-l"><%= candidate.email %></td>
-            <td class="tx-al-l"><%= candidate.days_since_applied %> days ago</td>
-            <td class="tx-al-l"><%= link_to "show", candidate_path(candidate, job_id: @job.id) %></td>
-          </tr>
         <% end %>
       </table>
     </div>

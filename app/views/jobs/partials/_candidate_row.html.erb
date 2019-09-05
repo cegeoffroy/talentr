@@ -1,0 +1,6 @@
+<tr data-application-id="<%= candidate.id %>">
+  <td class="tx-al-l strong"><%= candidate.name%></td>
+  <td class="tx-al-l"><%= candidate.email %></td>
+  <td class="tx-al-l"><%= candidate.days_since_applied %> days ago</td>
+  <td class="tx-al-l"><%= link_to "show", candidate_path(candidate, job_id: @job.id) %></td>
+</tr>
