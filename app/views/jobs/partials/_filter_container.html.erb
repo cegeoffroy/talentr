@@ -1,14 +1,14 @@
 <div class="filter-container">
-  <%= simple_form_for :filter, html: {class: 'form-inline filter-select'}, url: job_filter_path(job), method: :get, remote: true do |f| %>
-    <%= f.input :variable, collection: Candidate::FILTERS, label: false, placeholder: "Education" %>
-    <%= f.input :comparator, collection: Candidate::COMPARATORS, label: false, placeholder: "contains" %>
-    <%= f.input :value, label: false, placeholder: "data science" %>
+  <%= simple_form_for :filter, html: {class: 'form-inline filter-select form-victor'}, url: job_filter_path(job), method: :get, remote: true do |f| %>
+    <%= f.input :variable, collection: Candidate::FILTERS, label: false, :include_blank => "Select Data Point" %>
+    <%= f.input :comparator, collection: Candidate::COMPARATORS, label: false, :include_blank => "Operator" %>
+    <%= f.input :value, label: false, placeholder: "Value", input_html: {style: "padding: 0px 8px; height: 38px !important; border-radius: 4px !important; border: 1px solid #ced4da"} %>
     <%= f.simple_fields_for :hidden do |a| %>
       <% fields.each_with_index do |field, index| %>
         <%= a.input index, as: :hidden, input_html: {value: field, style: "width: 0;"} %>
       <% end %>
     <% end %>
-    <%= f.button :submit, "Add", class: "nbtn-primary filter-submit" %>
+    <%= f.button :submit, "Add Filter", class: "nbtn nbtn-tertiary filter-submit", style: "margin-left: 10px; color: #109CF1 !important;" %>
   <% end %>
   <div class="applied-filters">
     <% @fields.each do |field| %>

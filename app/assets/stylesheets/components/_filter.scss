@@ -1,8 +1,8 @@
 .filter-container {
-  padding: 20px;
-  border: 2px solid #EBEFF2;
+  padding: 15px;
+  border: 1px solid #EBEFF2;
   background-color: #E8ECEE;
-  border-radius: 5px;
+  border-radius: 4px;
 
   .nbtn-primary {
     width: 150px;
@@ -10,6 +10,20 @@
   }
 
 
+.form-victor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-victor div {
+  margin: 0px 5px;
+}
+
+.filter-container .text-search, .filter-container .filter-select {
+  border-radius: 4px !important;
+  height: 39px !important;
+}
 
   .text-search {
     display: flex;

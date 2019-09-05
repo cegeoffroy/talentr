@@ -3,28 +3,43 @@
   <%= link_to 'Upload CV', new_candidate_path(job_id: @job.id), class: 'nbtn nbtn-primary' %>
 </div>
 
-<p>Due-date: <%= @job.due_date.strftime("%d %b '%y") %></p>
-<div class="container-for-container">
-<%= render './jobs/partials/filter_container', job: @job, fields: @fields %>
+<div class="title">
+  <p style="color: #90A0B7; margin-bottom: 15px;">Due-date: <%= @job.due_date.strftime("%d %b '%y") %></p>
 </div>
-<div style="height: 350px; overflow-y: auto">
+
+<div class="container-for-container">
+  <%= render './jobs/partials/filter_container', job: @job, fields: @fields %>
+</div>
+
+<br>
+
+<div class="top-container">
   <% if @job.candidates.any? %>
-    <h2>List of candidates <span id="candidates-count">(<%= @filtered_results.count %>)</span></h2>
-    <table style="width:100%">
-      <tr>
-        <th>APPLICATIONS</th>
-        <th>EMAIL</th>
-        <th>RECEIVED</th>
-        <th>ACTIONS</th>
-      </tr>
-      <tbody id="candidates-table-body">
+    <h4>List of candidates <span id="candidates-count">(<%= @filtered_results.count %>)</span></h4>
+    <div class="table-container">
+      <table class="table" id="example">
+        <tr class="op-mid">
+          <th></th>
+          <th class="tx-al-l">EMAIL</th>
+          <th class="tx-al-l">RECEIVED</th>
+          <th class="tx-al-l">ACTIONS</th>
+        </tr>
         <% @filtered_results.each do |candidate| %>
           <%= render './jobs/partials/candidate_row', candidate: candidate %>
         <% end %>
-      </tbody>
-    </table>
-  <% else %>
+        <% @job.candidates.each do |candidate| %>
+          <tr data-application-id="<%= candidate.id %>">
+            <td class="tx-al-l strong"><%= candidate.name%></td>
+            <td class="tx-al-l"><%= candidate.email %></td>
+            <td class="tx-al-l"><%= candidate.days_since_applied %> days ago</td>
+            <td class="tx-al-l"><%= link_to "show", candidate_path(candidate, job_id: @job.id) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <% else %>
     <p>No candidate yet for this job opening</p>
   <% end %>
-</div>
-<%= link_to "« Back to Dashboard", dashboard_path, class: 'nbtn nbtn-simple' %>
+</div>q
+
+<%= link_to "« Go Back", dashboard_path, class: 'nbtn nbtn-simple' %>
