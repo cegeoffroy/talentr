@@ -69,8 +69,6 @@ class JobsController < ApplicationController
           results = Job.search(@job, @fields) if @fields.any?
         end
     end
-    p session[:fields]
-    p results
     if !results.nil? && results.any?
       session[:fields] = @fields
       first = results[0]
