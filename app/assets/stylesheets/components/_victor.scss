@@ -174,3 +174,14 @@ table .fa-times:hover {
 // table .fa-eye:hover {
 //   color: #0E0000;
 // }
+
+.alert {
+  left: 16px;
+  right: auto;
+}
+
+.alert.alert-notice {
+    background-color: rgba(255, 185, 70, 0.3);
+    color: #FFB946;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  }
