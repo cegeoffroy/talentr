@@ -7,8 +7,6 @@ candidatesCounter = document.querySelector("#candidates-count")
 
 filterContainer.innerHTML = "<%= form_partial %>";
 
-
-
 candidatesTable.innerHTML = ''
 <% @filtered_results.each do |candidate| %>
   <% partial = j render "./jobs/partials/candidate_row", candidate: candidate %>
