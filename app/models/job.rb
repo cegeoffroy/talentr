@@ -27,10 +27,10 @@ class Job < ApplicationRecord
       when "Suitability score"
         job_apps = nil
         arr = []
-        if comparator == ">"
+        if comparator == "more than"
           job_apps = JobApplication.where(candidate_id: candidates.ids).where("suitability > ?", value)
           p "hello #{job_apps}"
-        elsif comparator == "<"
+        elsif comparator == "les than"
           job_apps = JobApplication.where(candidate_id: candidates.ids).where("suitability < ?", value)
         elsif comparator == "exactly equals"
           job_apps = JobApplication.where(candidate_id: candidates.ids).where("suitability = ?", value)
@@ -40,9 +40,9 @@ class Job < ApplicationRecord
       when "Experience years"
         infos = Info.where(candidate_id: candidates.ids, meta_key: 'experience')
         arr = []
-        if comparator == ">"
+        if comparator == "more than"
           infos = infos.to_a.delete_if { |info| info.experience_duration < value.to_i }
-        elsif comparator == "<"
+        elsif comparator == "les than"
           infos = infos.to_a.delete_if { |info| info.experience_duration > value.to_i }
         elsif comparator == "exactly equals"
           infos = infos.to_a.delete_if { |info| info.experience_duration != value.to_i }
@@ -52,9 +52,9 @@ class Job < ApplicationRecord
       when "Similar Role Experience years"
         infos = Info.where(candidate_id: candidates.ids, meta_key: 'experience')
         arr = []
-        if comparator == ">"
+        if comparator == "more than"
           infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) < value.to_i }
-        elsif comparator == "<"
+        elsif comparator == "les than"
           infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) > value.to_i }
         elsif comparator == "exactly equals"
           infos = infos.to_a.delete_if { |info| info.similar_role_experience_duration(job) != value.to_i }
@@ -64,9 +64,9 @@ class Job < ApplicationRecord
       when "Education years"
         infos = Info.where(candidate_id: candidates.ids, meta_key: 'education')
         arr = []
-        if comparator == ">"
+        if comparator == "more than"
           infos = infos.to_a.delete_if { |info| info.education_duration < value.to_i }
-        elsif comparator == "<"
+        elsif comparator == "les than"
           infos = infos.to_a.delete_if { |info| info.education_duration > value.to_i }
         elsif comparator == "exactly equals"
           infos = infos.to_a.delete_if { |info| info.education_duration != value.to_i }
