@@ -175,13 +175,22 @@ table .fa-times:hover {
 //   color: #0E0000;
 // }
 
+
+
+////////// FIXING ALERT AND FLASHES //////////
+.close {
+  font-size: 1.2em !important;
+}
+
 .alert {
-  left: 16px;
+  left: 32px;
   right: auto;
 }
 
 .alert.alert-notice {
-    background-color: rgba(255, 185, 70, 0.3);
-    color: #FFB946;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  background-color: #334D6E;
+  color: #C2CFE0;
+  box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+
   }
