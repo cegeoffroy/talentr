@@ -1,31 +1,32 @@
 <div class="table-container jobs-index">
   <br>
   <table class="table" id="example">
-    <tr class="tx-al-c op-mid">
-      <th width="10"></th>
-      <th class="tx-al-c">PEND</th>
-      <th class="tx-al-c">ACCEPTED</th>
-      <th class="tx-al-c">TOTAL</th>
-      <th width="100" class="tx-al-r">DUE</th>
-    </tr>
-    <% @jobs.each do |job| %>
-    <tr>
-      <td><strong><%= link_to job.title, job_path(job) %></strong></td>
-      <td class="tx-al-c"><%= job.job_applications.where(status: 'pending').count %></td>
-      <!-- Insert here job_application -->
-      <td class="tx-al-c"><%= job.job_applications.where(status: 'accept').count %></td>
-      <td class="tx-al-c"><%= job.job_applications.count %></td>
-      <td class="tx-al-r">
-        <% if (job.due_date < (Date.today + 2.day)) %>
-        <i class="fas fa-xs fa-circle" style="color:#F7685B; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
-        <% elsif (job.due_date < (Date.today + 14.day)) %>
-        <i class="fas fa-xs fa-circle" style="color:#FFB946; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
-        <% else %>
-        <i class="fas fa-xs fa-circle" style="color:transparent;"></i>
-        <% end %>
-        <%= job.due_date.strftime("%d %b") %>
-      </td>
-    </tr>
-    <% end %>
+    <thead>
+      <tr class="tx-al-c op-mid">
+        <th ></th>
+        <th class="tx-al-c">PEND / ACCEPTED / TOTAL</th>
+        <th class="tx-al-r">DUE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @jobs.each do |job| %>
+      <tr>
+        <td width="40%"><strong><%= link_to job.title, job_path(job) %></strong></td>
+        <td width="40%" class="tx-al-c"><%= job.job_applications.where(status: 'pending').count %>
+        / <%= job.job_applications.where(status: 'accept').count %>
+        / <%= job.job_applications.count %></td>
+        <td width="20%" class="tx-al-r">
+          <% if (job.due_date < (Date.today + 2.day)) %>
+          <i class="fas fa-xs fa-circle" style="color:#F7685B; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
+          <% elsif (job.due_date < (Date.today + 14.day)) %>
+          <i class="fas fa-xs fa-circle" style="color:#FFB946; box-shadow: 0px 0px 8px rgba(255, 185, 69, 0.6);"></i>
+          <% else %>
+          <i class="fas fa-xs fa-circle" style="color:transparent;"></i>
+          <% end %>
+          <%= job.due_date.strftime("%d %b") %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
