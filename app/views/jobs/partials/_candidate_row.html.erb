@@ -9,7 +9,6 @@
         <% end %>
         <%= link_to candidate_path(candidate, job_id: @job.id) do %> <%= candidate.name%> <% end %>
   </td>
-  <td class="tx-al-l strong"><%= link_to candidate_path(candidate, job_id: @job.id) do %> <%= candidate.name%> <% end %></td>
   <td class="tx-al-l"><%= candidate.last_education_institute %></td>
   <td class="tx-al-l"><%= candidate.last_workplace %></td>
   <td class="tx-al-l"><%= candidate.job_applications[0].suitability %>%</td>
