@@ -1,7 +1,5 @@
 <tr data-candidate-id="<%= candidate.id %>" data-application-id="<%= candidate.job_applications[0].id %>">
   <td class="tx-al-l strong">
-
-
     <% if (candidate.job_applications[0].status === "accept") %>
         <i class="fas fa-xs fa-circle" style="color:#2ED47A; box-shadow: 0px 0px 8px rgba(46, 212, 122, 0.6);"></i>
         <% elsif (candidate.job_applications[0].status === "reject") %>
@@ -11,7 +9,11 @@
         <% end %>
         <%= link_to candidate_path(candidate, job_id: @job.id) do %> <%= candidate.name%> <% end %>
   </td>
-  <td class="tx-al-l"><%= candidate.email %></td>
+  <td class="tx-al-l strong"><%= link_to candidate_path(candidate, job_id: @job.id) do %> <%= candidate.name%> <% end %></td>
+  <td class="tx-al-l"><%= candidate.last_education_institute %></td>
+  <td class="tx-al-l"><%= candidate.last_workplace %></td>
+  <td class="tx-al-l"><%= candidate.job_applications[0].suitability %>%</td>
+  <td class="tx-al-l"><%= candidate.experiences_duration %></td>
   <td class="tx-al-l"><%= candidate.days_since_applied %> days ago</td>
   <td class="tx-al-r" id="last-td">
     <%= link_to job_application_path(candidate.job_applications[0], q: 'accept'), method: :patch, remote: true do %>

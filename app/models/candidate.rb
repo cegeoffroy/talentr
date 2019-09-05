@@ -35,6 +35,21 @@ class Candidate < ApplicationRecord
     infos.where(meta_key: 'phone_number')[0].meta_value
   end
 
+  def experiences_duration
+    exp = infos.where(meta_key: 'experience')[0]
+    exp.experience_duration
+  end
+
+  def last_education_institute
+    eds = infos.where(meta_key: 'education')[0]
+    eds.last_education
+  end
+
+  def last_workplace
+    exp = infos.where(meta_key: 'experience')[0]
+    exp.last_workplace
+  end
+
   FILTERS = ['Full Text', 'Suitability score', 'Experience years',
              'Similar Role Experience years', 'Education years', 'Skills', 'Certifications', 'Accept', 'Reject', 'Pending']
   COMPARATORS = ['contains', 'exactly equals', '>', '<']
