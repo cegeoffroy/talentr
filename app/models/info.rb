@@ -65,4 +65,9 @@ class Info < ApplicationRecord
     end
     false
   end
+
+  def last_education
+    eds = meta_value[:education]
+    eds.first[:institute]
+  end
 end
