@@ -63,7 +63,6 @@ class JobsController < ApplicationController
       end
       results = Job.search(@job, @fields)
     elsif session[:fields].any?
-      binding.pry
       results = Job.search(@job, session[:fields])
     end
     p session[:fields]
@@ -93,6 +92,7 @@ class JobsController < ApplicationController
   def remove_filter
     @job = Job.find(params[:job_id])
     @value = "#{params[:variable]}---#{params[:comparator]}---#{params[:value]}"
+    session[:fields].delete(@value)
     authorize @job
     respond_to do |format|
       format.js
