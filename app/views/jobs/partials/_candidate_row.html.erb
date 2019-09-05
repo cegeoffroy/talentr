@@ -1,6 +1,13 @@
 <tr data-application-id="<%= candidate.id %>">
-  <td class="tx-al-l strong"><%= candidate.name%></td>
+  <td class="tx-al-l strong"><%= link_to candidate_path(candidate, job_id: @job.id) do %> <%= candidate.name%> <% end %></td>
   <td class="tx-al-l"><%= candidate.email %></td>
   <td class="tx-al-l"><%= candidate.days_since_applied %> days ago</td>
-  <td class="tx-al-l"><%= link_to "show", candidate_path(candidate, job_id: @job.id) %></td>
+  <td class="tx-al-r" id="last-td">
+    <%= link_to job_application_path(candidate.job_applications[0], q: 'accept'), method: :patch, remote: true do %>
+      <i class="fas fa-check"></i>
+    <% end %>
+    <%= link_to job_application_path(candidate.job_applications[0], q: 'reject'), method: :patch, remote: true do %>
+      <i class="fas fa-times"></i>
+    <% end %>
+  </td>
 </tr>

@@ -1,14 +1,16 @@
 <div class="table-container">
   <% if @applications.any? %>
     <table class="table" id="example">
-      <tr class="op-mid">
-        <th></th>
-        <!--    <th>EMAIL</th> -->
-        <th class="tx-al-r">JOB OPENING</th>
-        <th class="tx-al-r">SUITABILITY</th>
-        <th class="tx-al-r">RECEIVED</th>
-        <th class="tx-al-r"></th>
-      </tr>
+      <thead>
+        <tr class="op-mid">
+          <th></th>
+          <!--    <th>EMAIL</th> -->
+          <th class="tx-al-r">JOB OPENING</th>
+          <th class="tx-al-r">SUITABILITY</th>
+          <th class="tx-al-r">RECEIVED</th>
+          <th class="tx-al-r"></th>
+        </tr>
+      </thead>
       <% @applications.each do |application| %>
       <tr data-application-id="<%= application.id %>">
         <td class="strong"><%= link_to candidate_path(application.candidate, job_id: application.job.id) do %> <%= application.candidate.name%> <% end %></td>
