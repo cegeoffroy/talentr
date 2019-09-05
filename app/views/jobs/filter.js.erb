@@ -7,17 +7,6 @@ candidatesCounter = document.querySelector("#candidates-count")
 
 filterContainer.innerHTML = "<%= form_partial %>";
 
-
-appliedFilters = document.querySelector(".applied-filters")
-<% @fields.each do |field| %>
-  <% split_fields = field.split("---") %>
-  <% field_hash = { variable: split_fields[0], comparator: split_fields[1], value: split_fields[2] } %>
-  <% if split_fields != [] %>
-    <% partial = j render "./jobs/partials/applied_filter", field: field_hash, job: @job %>
-    appliedFilters.insertAdjacentHTML("beforeend", "<%= partial %>")
-  <% end %>
-<% end %>
-
 candidatesTable.innerHTML = ''
 <% @filtered_results.each do |candidate| %>
   <% partial = j render "./jobs/partials/candidate_row", candidate: candidate %>
