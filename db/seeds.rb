@@ -101,27 +101,25 @@ Job.find_each do |job|
   end
   puts '4 keywords per job created!'
   puts 'creating 7 candidates per job ...'
-  7.times do
-    2.times do
   filenames = FILENAMES.dup
   links = URLS.dup
-      url = links.delete_at(rand(links.length))
-      # text = get_text_from_url(url)
-      filename = filenames.delete_at(rand(filenames.length))
-      # filename = FILENAMES.sample
-      text = get_text_from_file(filename)
-      candidate = Candidate.new(attachment: url,
-                                user: job.user)
-      ParserService.new.parse_linkedin_cv_from_text(candidate, text)
+  7.times do
+    url = links.delete_at(rand(links.length))
+    # text = get_text_from_url(url)
+    filename = filenames.delete_at(rand(filenames.length))
+    # filename = FILENAMES.sample
+    text = get_text_from_file(filename)
+    candidate = Candidate.new(attachment: url,
+                              user: job.user)
+    ParserService.new.parse_linkedin_cv_from_text(candidate, text)
 
-      application = JobApplication.create(job: job, candidate: candidate,
-                                          date: Date.today.to_datetime - (1..20).to_a.sample.days,
-                                          status: "pending")
-      suitability = SuitabilityService.new.add_suitability_to_application(application)
-      application.suitability = suitability
-      application.save
-      puts "created candidate"
-    end
+    application = JobApplication.create(job: job, candidate: candidate,
+                                        date: Date.today.to_datetime - (1..20).to_a.sample.days,
+                                        status: "pending")
+    suitability = SuitabilityService.new.add_suitability_to_application(application)
+    application.suitability = suitability
+    application.save
+    puts "created candidate"
   end
   puts '7 candidates per job created!'
 
