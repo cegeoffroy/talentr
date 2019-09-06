@@ -30,7 +30,15 @@
           <% end %>
         </td>
         <td class="tx-al-r"><%= application.suitability %>%</td>
-        <td class="tx-al-r" ><%= application.candidate.days_since_applied %> day<% if application.candidate.days_since_applied > 1 %>s<% end %> ago</td>
+        <td class="tx-al-r" >
+          <% if application.candidate.days_since_applied == 0 %>
+            Today
+          <% elsif application.candidate.days_since_applied > 1 %>
+            <%= application.candidate.days_since_applied %> days ago
+          <% elsif application.candidate.days_since_applied == 1 %>
+            <%= application.candidate.days_since_applied %> day ago
+          <% end %>
+        </td>
         <td class="tx-al-r" id="last-td">
           <%= link_to job_application_path(application, q: 'accept'), method: :patch, remote: true do %>
             <i class="fas fa-check"></i>
