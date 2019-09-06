@@ -136,8 +136,8 @@ elsif env == "demo"
 
   puts 'Creating user taras3nko.dima@gmail.com ...'
   g_account = User.new
-  g_account.first_name = "Victor"
-  g_account.last_name = "Ross"
+  g_account.first_name = "Dima"
+  g_account.last_name = "Tarasenko"
   g_account.email = 'taras3nko.dima@gmail.com'
   g_account.password = "123456"
   g_account.password_confirmation = "123456"
@@ -147,6 +147,8 @@ elsif env == "demo"
 
   puts 'Creating user dima@dontworry.com ...'
   normal_account = User.new
+  normal_account.first_name = "Dima"
+  normal_account.last_name = "Tarasenko"
   normal_account.email = 'dima@dontworry.com'
   normal_account.password = "123456"
   normal_account.password_confirmation = "123456"
@@ -187,18 +189,22 @@ elsif env == "demo"
       case job.title
       when "Product Manager"
         links = URLS.dup
-        links.each do |link|
+        links.each do |url|
+          puts "Making api call"
           text = get_text_from_url(url)
           candidate = Candidate.new(attachment: url,
                                     user: job.user)
+          puts "parsing"
           ParserService.new.parse_linkedin_cv_from_text(candidate, text)
           candidate.update(name: Faker::Name.name, email: Faker::Internet.free_email)
           application = JobApplication.create(job: job, candidate: candidate,
                                               date: Date.today.to_datetime - (1..5).to_a.sample.days,
                                               status: "pending")
+          puts "calculating suitability"
           suitability = SuitabilityService.new.add_suitability_to_application(application)
           application.suitability = suitability
           application.save
+          puts "created application from url"
         end
       when "Marketing Executive"
         7.times do
@@ -209,7 +215,7 @@ elsif env == "demo"
           application = JobApplication.create(job: job, candidate: candidate,
                                               date: Date.today.to_datetime - (1..15).to_a.sample.days,
                                               status: ["pending", 'accept', 'reject'].sample,
-                                              suitability: (1..100).sample)
+                                              suitability: (1..100).to_a.sample)
         end
       when "Business Development Representative"
         3.times do
@@ -220,7 +226,7 @@ elsif env == "demo"
           application = JobApplication.create(job: job, candidate: candidate,
                                               date: Date.today.to_datetime - (15..30).to_a.sample.days,
                                               status: ["pending", 'accept', 'reject'].sample,
-                                              suitability: (1..100).sample)
+                                              suitability: (1..100).to_a.sample)
         end
       end
     end
