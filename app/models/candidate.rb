@@ -1,6 +1,6 @@
 class Candidate < ApplicationRecord
-  has_many :infos
-  has_many :job_applications
+  has_many :infos, dependent: :destroy
+  has_many :job_applications, dependent: :destroy
   belongs_to :user
 
   def days_since_applied
