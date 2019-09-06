@@ -1,4 +1,6 @@
-KEYWORDS = %w(JavaScript Sales Remote Tech Ruby French Billingual Product Agile
+env = "demo"
+
+KEYWORDS = %w(JavaScript Sales Remote Tech Ruby SEO Product Agile
               Scrum App\ Development Excel Marketing Google\ Analytics)
 
 JOB_TITLES = %w(Product\ Manager Business\ Development\ Representative Web\ Developer)
@@ -43,86 +45,186 @@ Candidate.destroy_all
 User.destroy_all
 Job.destroy_all
 
-puts "creating keywords ..."
-KEYWORDS.each do |keyword|
-  Keyword.create(word: keyword)
-end
-puts "#{Keyword.count} keywords created!"
-
-puts 'Creating users ...'
-victor = User.new
-victor.first_name = "Victor"
-victor.last_name = "Ross"
-victor.email = 'victor@example.com'
-victor.password = "123456"
-victor.password_confirmation = "123456"
-victor.role = "owner"
-victor.company = "Disney"
-victor.save!
-
-charles = User.new
-charles.email = 'charles@example.com'
-charles.first_name = "Charles"
-charles.last_name = "Geoffroy"
-charles.password = "123456"
-charles.password_confirmation = "123456"
-charles.role = "owner"
-charles.company = "Le Wagon"
-charles.save!
-
-dima = User.new
-dima.email = 'dima@example.com'
-dima.first_name = "Dima"
-dima.last_name = "Tarasenko"
-dima.password = "123456"
-dima.password_confirmation = "123456"
-dima.role = "owner"
-dima.company = "Five Guys"
-dima.save!
-
-puts "Created #{User.count} users!"
-
-puts 'creating 2 jobs under each user ...'
-User.find_each do |user|
-  3.times do
-    job = Job.new(title: JOB_TITLES.sample,
-                     due_date: Date.today.to_datetime + (1..100).to_a.sample.days)
-    job.user = user
-    job.save!
+if env == "testing"
+  puts "creating keywords ..."
+  KEYWORDS.each do |keyword|
+    Keyword.create(word: keyword)
   end
-end
-puts '2 jobs per user created!'
+  puts "#{Keyword.count} keywords created!"
 
+  puts 'Creating users ...'
+  victor = User.new
+  victor.first_name = "Victor"
+  victor.last_name = "Ross"
+  victor.email = 'victor@example.com'
+  victor.password = "123456"
+  victor.password_confirmation = "123456"
+  victor.role = "owner"
+  victor.company = "Disney"
+  victor.save!
 
-Job.find_each do |job|
-  puts 'creating 4 keywords per job ...'
-  4.times do
-    JobKeyword.create(job: job, keyword: Keyword.order('RANDOM()').first)
+  charles = User.new
+  charles.email = 'charles@example.com'
+  charles.first_name = "Charles"
+  charles.last_name = "Geoffroy"
+  charles.password = "123456"
+  charles.password_confirmation = "123456"
+  charles.role = "owner"
+  charles.company = "Le Wagon"
+  charles.save!
+
+  dima = User.new
+  dima.email = 'dima@example.com'
+  dima.first_name = "Dima"
+  dima.last_name = "Tarasenko"
+  dima.password = "123456"
+  dima.password_confirmation = "123456"
+  dima.role = "owner"
+  dima.company = "Five Guys"
+  dima.save!
+
+  puts "Created #{User.count} users!"
+
+  puts 'creating 2 jobs under each user ...'
+  User.find_each do |user|
+    3.times do
+      job = Job.new(title: JOB_TITLES.sample,
+                       due_date: Date.today.to_datetime + (1..100).to_a.sample.days)
+      job.user = user
+      job.save!
+    end
   end
-  puts '4 keywords per job created!'
-  puts 'creating 7 candidates per job ...'
-  filenames = FILENAMES.dup
-  links = URLS.dup
-  7.times do
-    url = links.delete_at(rand(links.length))
-    # text = get_text_from_url(url)
-    filename = filenames.delete_at(rand(filenames.length))
-    # filename = FILENAMES.sample
-    text = get_text_from_file(filename)
-    candidate = Candidate.new(attachment: url,
-                              user: job.user)
-    ParserService.new.parse_linkedin_cv_from_text(candidate, text)
+  puts '2 jobs per user created!'
 
-    application = JobApplication.create(job: job, candidate: candidate,
-                                        date: Date.today.to_datetime - (1..20).to_a.sample.days,
-                                        status: "pending")
-    suitability = SuitabilityService.new.add_suitability_to_application(application)
-    application.suitability = suitability
-    application.save
-    puts "created candidate"
+
+  Job.find_each do |job|
+    puts 'creating 4 keywords per job ...'
+    4.times do
+      JobKeyword.create(job: job, keyword: Keyword.order('RANDOM()').first)
+    end
+    puts '4 keywords per job created!'
+    puts 'creating 7 candidates per job ...'
+    filenames = FILENAMES.dup
+    links = URLS.dup
+    7.times do
+      url = links.delete_at(rand(links.length))
+      # text = get_text_from_url(url)
+      filename = filenames.delete_at(rand(filenames.length))
+      # filename = FILENAMES.sample
+      text = get_text_from_file(filename)
+      candidate = Candidate.new(attachment: url,
+                                user: job.user)
+      ParserService.new.parse_linkedin_cv_from_text(candidate, text)
+
+      application = JobApplication.create(job: job, candidate: candidate,
+                                          date: Date.today.to_datetime - (1..20).to_a.sample.days,
+                                          status: "pending")
+      suitability = SuitabilityService.new.add_suitability_to_application(application)
+      application.suitability = suitability
+      application.save
+      puts "created candidate"
+    end
+    puts '7 candidates per job created!'
+
   end
-  puts '7 candidates per job created!'
+elsif env == "demo"
+  puts "creating keywords ..."
+  KEYWORDS.each do |keyword|
+    Keyword.create(word: keyword)
+  end
+  puts "#{Keyword.count} keywords created!"
 
+  puts 'Creating user taras3nko.dima@gmail.com ...'
+  g_account = User.new
+  g_account.first_name = "Victor"
+  g_account.last_name = "Ross"
+  g_account.email = 'taras3nko.dima@gmail.com'
+  g_account.password = "123456"
+  g_account.password_confirmation = "123456"
+  g_account.role = "owner"
+  g_account.company = "Don't Worry!"
+  g_account.save!
+
+  puts 'Creating user dima@dontworry.com ...'
+  normal_account = User.new
+  normal_account.email = 'dima@dontworry.com'
+  normal_account.password = "123456"
+  normal_account.password_confirmation = "123456"
+  normal_account.role = "owner"
+  normal_account.company = "Don't Worry!"
+  normal_account.save!
+
+  User.find_each do |user|
+    product_job = Job.new(title: "Product Manager",
+                     due_date: Date.today.to_datetime)
+    product_job.user = user
+    product_job.save!
+    puts "Created Job #{product_job.title} for user #{user.email}"
+
+    marketing_job = Job.new(title: "Marketing Executive",
+                     due_date: Date.today.to_datetime + 6.days)
+    marketing_job.user = user
+    marketing_job.save!
+    puts "Created Job #{marketing_job.title} for user #{user.email}"
+
+    business_job = Job.new(title: "Business Development Representative",
+                     due_date: Date.today.to_datetime + 63.days)
+    business_job.user = user
+    business_job.save!
+    puts "Created Job #{business_job.title} for user #{user.email}"
+  end
+
+  Job.find_each do |job|
+    puts 'creating 4 keywords per job ...'
+    4.times do
+      JobKeyword.create(job: job, keyword: Keyword.order('RANDOM()').first)
+    end
+  end
+
+
+  User.find_each do |user|
+    user.jobs.find_each do |job|
+      case job.title
+      when "Product Manager"
+        links = URLS.dup
+        links.each do |link|
+          text = get_text_from_url(url)
+          candidate = Candidate.new(attachment: url,
+                                    user: job.user)
+          ParserService.new.parse_linkedin_cv_from_text(candidate, text)
+          candidate.update(name: Faker::Name.name, email: Faker::Internet.free_email)
+          application = JobApplication.create(job: job, candidate: candidate,
+                                              date: Date.today.to_datetime - (1..5).to_a.sample.days,
+                                              status: "pending")
+          suitability = SuitabilityService.new.add_suitability_to_application(application)
+          application.suitability = suitability
+          application.save
+        end
+      when "Marketing Executive"
+        7.times do
+
+          candidate = Candidate.create(name: Faker::Name.name, email: Faker::Internet.free_email,
+                                    attachment: "http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439799/uy2orz3gm2esrr5r2vqq.pdf",
+                                    user: user)
+          application = JobApplication.create(job: job, candidate: candidate,
+                                              date: Date.today.to_datetime - (1..15).to_a.sample.days,
+                                              status: ["pending", 'accept', 'reject'].sample,
+                                              suitability: (1..100).sample)
+        end
+      when "Business Development Representative"
+        3.times do
+
+          candidate = Candidate.create(name: Faker::Name.name, email: Faker::Internet.free_email,
+                                    attachment: "http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439799/uy2orz3gm2esrr5r2vqq.pdf",
+                                    user: user)
+          application = JobApplication.create(job: job, candidate: candidate,
+                                              date: Date.today.to_datetime - (15..30).to_a.sample.days,
+                                              status: ["pending", 'accept', 'reject'].sample,
+                                              suitability: (1..100).sample)
+        end
+      end
+    end
+  end
 end
 
 
