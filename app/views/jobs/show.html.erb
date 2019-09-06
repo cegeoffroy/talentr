@@ -4,7 +4,7 @@
 </div>
 
 <div class="title">
-  <p style="color: #90A0B7; margin-bottom: 15px;">Due-date: <%= @job.due_date.strftime("%d %b '%y") %></p>
+  <p style="color: #90A0B7; margin-bottom: 15px;">Due Date: <%= @job.due_date.strftime("%d %B %Y") %></p>
 </div>
 
 <div class="container-for-container">
@@ -21,12 +21,12 @@
         <thead>
           <tr class="op-mid">
             <th></th>
-            <th class="tx-al-l">EDUCATION</th>
-            <th class="tx-al-l">LAST WORKPLACE</th>
-            <th class="tx-al-l">SUITABILITY</th>
-            <th class="tx-al-l">YEARS OF EXP</th>
-            <th class="tx-al-r">RECEIVED</th>
-            <th class="tx-al-r"></th>
+            <th class="tx-al-l sortable" data-id="1">EDUCATION</th>
+            <th class="tx-al-l sortable" data-id="2">LAST WORKPLACE</th>
+            <th class="tx-al-l sortable" data-id="3">SUITABILITY</th>
+            <th class="tx-al-l sortable" data-id="4">YEARS OF EXP</th>
+            <th class="tx-al-r sortable" data-id="5">RECEIVED</th>
+            <th class="tx-al-r"><button class="csv-button nbtn-tertiary">Export CSV</button></th>
           </tr>
         </thead>
         <tbody id="candidates-table-body">
