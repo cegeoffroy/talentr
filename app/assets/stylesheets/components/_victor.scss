@@ -14,6 +14,8 @@ a:hover {
   color: #0a6eab;
 }
 
+
+
 //////////// FIX JOB SHOW //////////
 .filter-victor {
   background: #fcfcfc;
@@ -25,7 +27,15 @@ a:hover {
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-
+div.filter_variable, div.filter_comparator, input.filter-submit {
+  flex-grow: 0 !important;
+}
+div.filter_variable{
+  width: 30%;
+}
+div.filter_comparator{
+  width: 15%;
+}
 ///// GO BACK BUTTON //////
 
 a.go-back {
@@ -187,7 +197,7 @@ table .fa-times:hover {
   right: auto;
 }
 
-.alert.alert-notice, .alert.alert-alert {
+.alert.alert-notice, .alert.alert-alert, .alert.alert-error, .alert.alert-success   {
   background-color: #334D6E;
   color: #C2CFE0;
   box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.1);

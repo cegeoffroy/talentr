@@ -1,14 +1,17 @@
 <div class="filter-container">
   <%= simple_form_for :filter, html: {class: 'form-inline filter-select form-victor'}, url: job_filter_path(job), method: :get, remote: true do |f| %>
-    <%= f.input :variable, collection: Candidate::FILTERS, label: false, :include_blank => "Select Data Point" %>
-    <%= f.input :comparator, collection: Candidate::COMPARATORS, label: false, :include_blank => "Operator" %>
-    <%= f.input :value, label: false, placeholder: "Value", input_html: {style: "padding: 0px 8px; height: 34px !important; border-radius: 4px !important; border: 1px solid #ced4da; font-family: inherit; font-size: 14px;"} %>
+
+
+    <%= f.input :variable, collection: Candidate::FILTERS, label: false, :include_blank => "Select Data Point", input_html: {style: "flex-grow: 0; width: 125%;"} %>
+    <%= f.input :comparator, collection: Candidate::COMPARATORS, label: false, :include_blank => "Operator", input_html: {style: "flex-grow: 0; width: 100%;"} %>
+    <%= f.input :value, label: false, placeholder: "Value", input_html: {style: "padding: 0px 8px; height: 34px !important; border-radius: 4px !important; border: 1px solid #ced4da; font-family: inherit; font-size: 14px; flex-grow: 1;"} %>
     <%= f.simple_fields_for :hidden do |a| %>
       <% fields.each_with_index do |field, index| %>
         <%= a.input index, as: :hidden, input_html: {value: field, style: "width: 0;"} %>
       <% end %>
     <% end %>
-    <%= f.button :submit, "Add Filter »", class: "nbtn nbtn-tertiary filter-submit", style: "margin-left: 10px; color: #109CF1 !important;" %>
+
+    <%= f.button :submit, "Add Filter", class: "nbtn nbtn-tertiary filter-submit", style: "margin: 0px; color: #109CF1 !important; flex-grow: 0 !important; padding: 0px; width: 150px;" %>
   <% end %>
   <div class="applied-filters" style="margin:0px 8px 8px 8px;">
     <% @fields.each do |field| %>
