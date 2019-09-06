@@ -9,11 +9,11 @@
     <% end %>
     <%= link_to candidate_path(candidate, job_id: @job.id) do %> <%= candidate.name%> <% end %>
   </td>
-  <td class="tx-al-l"><%= candidate.last_education_institute %></td>
-  <td class="tx-al-l"><%= candidate.last_workplace %></td>
-  <td class="tx-al-c"><%= candidate.job_applications[0].suitability %>%</td>
-  <td class="tx-al-c"><%= candidate.experiences_duration %></td>
-  <td class="tx-al-r"><%= candidate.days_since_applied %> days ago</td>
+  <td class="tx-al-l" data-id="1"><%= candidate.last_education_institute %></td>
+  <td class="tx-al-l" data-id="2"><%= candidate.last_workplace %></td>
+  <td class="tx-al-c" data-id="3"><%= candidate.job_applications[0].suitability %>%</td>
+  <td class="tx-al-c" data-id="4"><%= candidate.experiences_duration %></td>
+  <td class="tx-al-r" data-id="5"><%= candidate.days_since_applied %> days ago</td>
   <td class="tx-al-r" id="last-td">
     <%= link_to job_application_path(candidate.job_applications[0], q: 'accept'), method: :patch, remote: true do %>
       <i class="fas fa-check"></i>

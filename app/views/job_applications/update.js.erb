@@ -3,16 +3,15 @@ if (<%= !@job_application.id.nil? %>) {
   if (form) {
     Rails.fire(form, 'submit')
   } else {
-    document.querySelector("[data-application-id='<%= @job_application.id %>']").remove();
-    counterElement = document.querySelector(".outstanding-count")
-    counter = counterElement.innerText
-    intCounter = parseInt(counter, 10)
-    intCounter -= 1
+    console.log("hello")
     jobsIndex = document.querySelector(".ajax-container")
-    counterElement.innerText = intCounter
-    <% partial = j render "./jobs/index", jobs: @jobs %>
+    superstarsIndex = document.querySelector(".dash-container")
+    <% jobs_partial = j render "./jobs/index", jobs: @jobs %>
+    <% applications_partial = j render 'shared/applications_dash', applications: @applications %>
     jobsIndex.innerHTML = ''
-    jobsIndex.insertAdjacentHTML("beforeend", "<%= partial %>")
+    jobsIndex.insertAdjacentHTML("beforeend", "<%= jobs_partial %>")
+    superstarsIndex.innerHTML = ''
+    superstarsIndex.insertAdjacentHTML("beforeend", "<%= applications_partial %>")
   }
 }
 

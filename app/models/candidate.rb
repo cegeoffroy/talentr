@@ -51,6 +51,6 @@ class Candidate < ApplicationRecord
   end
 
   FILTERS = ['Full Text', 'Suitability score', 'Experience years',
-             'Similar Role Experience years', 'Education years', 'Skills', 'Certifications', 'Accept', 'Reject', 'Pending']
+             'Similar Role Experience years', 'Education years', 'Skills', 'Certifications', 'Status']
   COMPARATORS = ['contains', 'exactly equals', 'more than', 'less than']
 end

@@ -13,9 +13,22 @@
       </thead>
       <% @applications.each do |application| %>
       <tr data-application-id="<%= application.id %>">
-        <td class="strong"><%= link_to candidate_path(application.candidate, job_id: application.job.id) do %> <%= application.candidate.name%> <% end %></td>
+        <td class="tx-al-l strong status-icon">
+          <% if (application.status == "accept") %>
+              <i class="fas fa-xs fa-circle circle-green"></i>
+          <% elsif (application.status == "reject") %>
+              <i class="fas fa-xs fa-circle circle-red"></i>
+          <% else %>
+               <i class="fas fa-xs fa-circle circle-transparent"></i>
+          <% end %>
+          <%= link_to candidate_path(application.candidate, job_id: application.job.id) do %> <%= application.candidate.name%> <% end %>
+        </td>
         <!-- <td><%= application.candidate.email %></td> -->
-        <td class="tx-al-r"><%= application.job.title %></td>
+        <td class="tx-al-r">
+          <%= link_to job_path(application.job) do %>
+            <%= application.job.title %>
+          <% end %>
+        </td>
         <td class="tx-al-r"><%= application.suitability %>%</td>
         <td class="tx-al-r" ><%= application.candidate.days_since_applied %> day<% if application.candidate.days_since_applied > 1 %>s<% end %> ago</td>
         <td class="tx-al-r" id="last-td">

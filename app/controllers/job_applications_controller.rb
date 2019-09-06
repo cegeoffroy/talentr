@@ -45,6 +45,7 @@ class JobApplicationsController < ApplicationController
     if ['accept', 'reject'].include?(status)
       @job_application.status = status
       @job_application.save
+      @applications = current_user.job_applications.sort_by(&:suitability).reverse.first(5)
     else
       @job_application.id = nil
     end

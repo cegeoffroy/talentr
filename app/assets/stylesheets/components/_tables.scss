@@ -2,6 +2,10 @@
   width: 100%;
   border: none;
 }
+.table thead th {
+  border: 0px !important;
+}
+
 
 .table-container th {
   font-family: Cabin;

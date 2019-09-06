@@ -89,17 +89,7 @@ class Job < ApplicationRecord
           infos.each { |info| arr << info.candidate.id }
         end
         all_results << arr
-      when "Accept"
-        arr = []
-        job_apps = JobApplication.where(candidate_id: candidates.ids).where(status: value)
-        job_apps.each { |job_app| arr << job_app.candidate.id } if job_apps
-        all_results << arr
-      when "Reject"
-        arr = []
-        job_apps = JobApplication.where(candidate_id: candidates.ids).where(status: value)
-        job_apps.each { |job_app| arr << job_app.candidate.id } if job_apps
-        all_results << arr
-      when 'Pending'
+      when "Status"
         arr = []
         job_apps = JobApplication.where(candidate_id: candidates.ids).where(status: value)
         job_apps.each { |job_app| arr << job_app.candidate.id } if job_apps
