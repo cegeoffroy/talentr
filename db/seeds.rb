@@ -8,13 +8,11 @@ UNIVERSITIES = %w(University\ of\ Surrey University\ of\ Oxford University\ of\ 
                   UCL Kings\ College)
 SKILLS = %w(Accounting Enterpreneurship Microsoft\ Office Ruby Investment Web\ Development)
 
-URLS = %w(http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439799/uy2orz3gm2esrr5r2vqq.pdf
-         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567431718/die0teufqwqcgakqidmh.pdf
+
+URLS = %w(http://res.cloudinary.com/dqh0reqn3/image/upload/v1567431718/die0teufqwqcgakqidmh.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439553/lrk96piy114vjhzgaufa.pdf
-         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567440193/zuvito0egrckudlinkwh.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567440873/a3qwnfpcjhnedonu2qp9.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441097/fujy7fktrmhs6gl0y6tp.pdf
-         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441398/wmnu8a4edguf1ehsyq6s.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441462/c2rc9f3iu0muiwdglxq0.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441516/sjsnnl9ij7dqff74sedd.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567763296/ruzx4c857x6qu6ghs7xf.pdf
@@ -203,7 +201,7 @@ elsif env == "demo"
                                     user: job.user)
           puts "parsing"
           ParserService.new.parse_linkedin_cv_from_text(candidate, text)
-          # candidate.update(name: Faker::Name.name, email: Faker::Internet.free_email)
+          candidate.update(name: Faker::Name.name, email: Faker::Internet.free_email)
           application = JobApplication.create(job: job, candidate: candidate,
                                               date: Date.today.to_datetime - (1..5).to_a.sample.days,
                                               status: "pending")
