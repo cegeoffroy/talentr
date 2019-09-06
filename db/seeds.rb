@@ -16,7 +16,14 @@ URLS = %w(http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439799/uy2orz3gm
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441097/fujy7fktrmhs6gl0y6tp.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441398/wmnu8a4edguf1ehsyq6s.pdf
          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441462/c2rc9f3iu0muiwdglxq0.pdf
-         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441516/sjsnnl9ij7dqff74sedd.pdf)
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441516/sjsnnl9ij7dqff74sedd.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567763296/ruzx4c857x6qu6ghs7xf.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567764309/wbalrtlild2phedkxhkl.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567764774/lnjhkroestgowtzpkjtz.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567765026/hdapp72ijlj8eanqdly2.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567765136/eqwrloqxlmcgmofpdg2i.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567765254/bixo3gyhmrnw1nz4y0yu.pdf
+         http://res.cloudinary.com/dqh0reqn3/image/upload/v1567765360/uhstvwmku9nskvyefsq4.pdf)
 FILENAMES = %w(./ahmad.txt ./alwali.txt ./ben.txt ./dima.txt ./evia.txt ./shivam.txt ./wesley.txt
                ./rich-cv.txt )
 
@@ -196,7 +203,7 @@ elsif env == "demo"
                                     user: job.user)
           puts "parsing"
           ParserService.new.parse_linkedin_cv_from_text(candidate, text)
-          candidate.update(name: Faker::Name.name, email: Faker::Internet.free_email)
+          # candidate.update(name: Faker::Name.name, email: Faker::Internet.free_email)
           application = JobApplication.create(job: job, candidate: candidate,
                                               date: Date.today.to_datetime - (1..5).to_a.sample.days,
                                               status: "pending")

@@ -26,7 +26,8 @@ URLS = %w(http://res.cloudinary.com/dqh0reqn3/image/upload/v1567439799/uy2orz3gm
           http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441097/fujy7fktrmhs6gl0y6tp.pdf
           http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441398/wmnu8a4edguf1ehsyq6s.pdf
           http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441462/c2rc9f3iu0muiwdglxq0.pdf
-          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441516/sjsnnl9ij7dqff74sedd.pdf)
+          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567441516/sjsnnl9ij7dqff74sedd.pdf
+          http://res.cloudinary.com/dqh0reqn3/image/upload/v1567764309/wbalrtlild2phedkxhkl.pdf)
 
 JobApplication.destroy_all
 JobKeyword.destroy_all
