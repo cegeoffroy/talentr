@@ -1,6 +1,7 @@
 <div class="title">
   <h2><%= @job.title %></h2>
-  <%= link_to 'Upload CV', new_candidate_path(job_id: @job.id), class: 'nbtn nbtn-primary' %>
+  <button class="nbtn nbtn-primary" data-toggle="modal" data-target="#cv-upload">Upload CVs</button>
+  <%#= link_to 'Upload CV', new_candidate_path(job_id: @job.id), class: 'nbtn nbtn-primary' %>
 </div>
 
 <div class="title">
@@ -42,3 +43,25 @@
 </div>
 
 <%= link_to "« Go Back", dashboard_path, class: 'nbtn nbtn-simple' %>
+
+<div class="modal fade" id="cv-upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Upload CVs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="height: auto; overflow-y: auto">
+          <%= simple_form_for :applications, url: job_job_applications_path(@job) do |f| %>
+            <%= f.file_field :attachments, required: true, multiple: true, accept: ".pdf"  %>
+            <br />
+            <p><%= f.button :submit, "Upload", class: "nbtn nbtn-primary", style: "margin-top:24px;" %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
