@@ -115,6 +115,7 @@ if env == "testing"
       url = links.delete_at(rand(links.length))
       # text = get_text_from_url(url)
       filename = filenames.delete_at(rand(filenames.length))
+      filename = "./test_cvs/#{filename}"
       # filename = FILENAMES.sample
       text = get_text_from_file(filename)
       candidate = Candidate.new(attachment: url,
